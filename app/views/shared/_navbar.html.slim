@@ -1,0 +1,32 @@
+.navbar.navbar-fixed-top
+  .navbar-inner
+    .container
+      a.brand href="#"
+        span 品味
+        span.cl-blue 筆記
+      .nav-collapse
+        ul.nav.pull-right
+          li
+            a href="index.html"
+          li.divider-vertical
+          li.avatar_small
+            a href="account.html"
+          - if current_user
+            li.dropdown
+              a.dropdown-toggle data-toggle="dropdown" href="#"
+              | #{current_user.username}
+              b.caret
+            ul.dropdown-menu
+              li= link_to user_path(current_user) do
+                i.icon-user
+                | Account Setting
+              li.divider
+              li= link_to signout_path, :id => "sign_out" do
+                i.icon-off
+                | 登出
+          - else
+            li
+              a#signin-btn-in-nav href="/signin" 登入
+              ' 或
+              a#signup-btn-in-nav href="/signup" 註冊
+              ' 來建立專屬於自己的品酒筆記

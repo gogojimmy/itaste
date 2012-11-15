@@ -1,0 +1,12 @@
+development:
+  facebook:
+    app_id: "273572676089462"
+    secret_key: "6029cb83251be4a8fffe6b02497f6513"
+test:
+  facebook:
+    app_id: "12341234"
+    secret_key: "barbarbarbar"
+production:
+  facebook:
+    app_id: "12341234"
+    secret_key: "barbarbarbar"

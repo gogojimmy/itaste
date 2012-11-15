@@ -1,0 +1,11 @@
+.row
+  .login-content.span4.offset4
+    .header-login.well
+      h3= t "devise.instructions.forget_your_password"
+
+    = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: 'well' }) do |f|
+      = devise_error_messages!
+      = f.email_field :email, placeholder: "請輸入您註冊時的Email"
+      = f.submit t("devise.instructions.send_me_reset_password_instructions"), :class => 'btn btn-info'
+      hr
+      = render "devise/shared/links"
