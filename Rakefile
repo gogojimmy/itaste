@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-PinWayNote::Application.load_tasks
+Itaste::Application.load_tasks

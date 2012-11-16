@@ -1,4 +1,4 @@
-PinWayNote::Application.routes.draw do
+Itaste::Application.routes.draw do
   root :to => "welcome#index"
   devise_for :users, path_names: {sign_in: "login", sign_out: "logout"}, :skip => [:sessions], controllers: {omniauth_callbacks: "omniauth_callbacks"}
   devise_scope :user do
