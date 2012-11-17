@@ -12,6 +12,10 @@ gem 'slim'
 gem 'simple_form'
 gem 'omniauth-facebook'
 gem 'exception_notification'
+gem 'awesome_print'
+gem 'pry'
+gem 'pry-remote'
+gem 'pry-nav'
 
 # Gems used only for assets and not required
 # in production environments by default.
