@@ -12,7 +12,7 @@ development:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: pin_way_note_development
+  database: itaste_development
   pool: 5
   username: root
   password: '0000'
@@ -25,7 +25,7 @@ test:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: pin_way_note_test
+  database: itaste_test
   pool: 5
   username: root
   password: '0000'
