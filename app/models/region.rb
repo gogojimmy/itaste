@@ -2,8 +2,8 @@ class Region < ActiveRecord::Base
   attr_accessible :name, :parent_id
   has_many :wines
   has_many :producers
-  has_many :grape_region_ships
-  has_many :grapes, through: :grape_region_ships
+  has_many :grape_region_ship
+  has_many :grapes, through: :grape_region_ship
 
   scope :root_only, where('parent_id is null').includes(:children)
 

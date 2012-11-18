@@ -13,6 +13,8 @@ Itaste::Application.routes.draw do
   end
   resources :wines
   resources :producers, only: [:index, :show]
+  resources :foods, only: [:index]
+  resources :grapes, only: [:index]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

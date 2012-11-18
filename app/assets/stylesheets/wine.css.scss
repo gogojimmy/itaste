@@ -38,7 +38,7 @@ ul.wine-info {
     border-bottom: 1px solid #CDCDCD;
     position: relative;
     line-height: 2em;
-    span.wine-property-label {
+    span.wine-property-label, span.wine-food-label {
       text-align: left;
       float: left;
       display: block;
@@ -47,5 +47,14 @@ ul.wine-info {
       text-align: right;
       float: right;
     }
+    span.wine-food-label {
+      margin-right: 5px;
+    }
+    span.food-tag {
+      margin-right: 5px;
+      display: inline-block;
+    }
   }
 }
+
+h1.show-title { padding-left: 10px; }

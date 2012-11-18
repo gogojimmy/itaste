@@ -1,4 +1,4 @@
-class CreateWineGrapeShips < ActiveRecord::Migration
+class CreateWineGrapeShip < ActiveRecord::Migration
   def change
     create_table :wine_grape_ships do |t|
       t.integer :wine_id

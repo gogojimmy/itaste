@@ -11,13 +11,22 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121117115553) do
+ActiveRecord::Schema.define(:version => 20121118040311) do
 
   create_table "badges", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "foods", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "foods", ["name"], :name => "index_foods_on_name"
 
   create_table "grape_region_ships", :force => true do |t|
     t.integer  "grape_id"
@@ -106,6 +115,16 @@ ActiveRecord::Schema.define(:version => 20121117115553) do
 
   add_index "wine_badge_ships", ["badge_id"], :name => "index_wine_badge_ships_on_badge_id"
   add_index "wine_badge_ships", ["wine_id"], :name => "index_wine_badge_ships_on_wine_id"
+
+  create_table "wine_food_ships", :force => true do |t|
+    t.integer  "wine_id"
+    t.integer  "food_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "wine_food_ships", ["food_id"], :name => "index_wine_food_ships_on_food_id"
+  add_index "wine_food_ships", ["wine_id"], :name => "index_wine_food_ships_on_wine_id"
 
   create_table "wine_grape_ships", :force => true do |t|
     t.integer  "wine_id"

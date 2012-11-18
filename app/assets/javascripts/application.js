@@ -16,3 +16,4 @@
 //= require_tree .
 //= require bootstrap
 //= require theme
+//= require jquery.tokeninput

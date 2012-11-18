@@ -27,6 +27,7 @@ group :assets do
   gem 'compass-rails'
   gem 'font-awesome-rails'
   gem 'jquery-ui-rails'
+  gem 'jquery-tokeninput-rails'
 end
 
 gem 'jquery-rails'

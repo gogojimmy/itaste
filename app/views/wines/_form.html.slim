@@ -5,6 +5,7 @@
         h3 有關酒
       = f.input :name, label: "酒名", placeholder: "例如：Romanee-Conti"
       = f.input :wine_type, label: "種類", collection: collection_for_wine_type, :as => :radio_buttons, :item_wrapper_class => 'inline'
+      = f.input :grape_tokens, label: "葡萄品種", as: :string, input_html: { class: 'span8', id: 'grape-token-input', data: { load: @wine.grapes } }
       = f.input :vintage, label: "年份", as: :select, collection: 1950..Time.now.year
       = f.input :alcohol, label: "酒精濃度"
       = f.input :producer_name, label: "酒莊", input_html: { class: 'producer-picker', data: { autocomplete_source: producers_path(format: :json) } }
@@ -27,6 +28,7 @@
       = f.input :appearance, label: "外觀", input_html: { class: 'span8', rows: 10 }
       = f.input :nose, label: "香氣", input_html: { class: 'span8', rows: 10 }
       = f.input :taste, label: "口感", input_html: { class: 'span8', rows: 10 }
+      = f.input :food_tokens, label: "搭配餐點", as: :string, input_html: { class: 'span8', id: "food-token-input", data: { load: @wine.foods } }
       = f.input :opinion, label: "想法", input_html: { class: 'span8', rows: 10 }
   .form-actions
     = f.button :submit, "送出", :class => 'btn btn-primary'

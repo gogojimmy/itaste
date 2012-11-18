@@ -4,7 +4,7 @@
       .box-content-widget.span9
         .row
           .title.bg-title.span9
-            h3= @wine.name
+            h1.show-title= @wine.name
         .widget
           .widget-content
             .row-fluid
@@ -42,23 +42,43 @@
                       .overflow-hidden
                         span.wine-producer-label 價格
                         span.wine-property= @wine.price
+                  - if @wine.foods
+                    li
+                      .overflow-hiddem
+                        span.wine-food-label 搭配食物
+                        span.wine-food-label-tags
+                          - @wine.foods.each do |food|
+                            span.label.label-info.food-tag= food.name
         .widget
           .widget-content
-            - if @wine.place
-              h3.title 品酒地點
-              = @wine.place
-            - if @wine.appearance
-              h3.title 外觀
-              = simple_format @wine.appearance
-            - if @wine.nose
-              h3.title 香氣
-              = simple_format @wine.nose
-            - if @wine.taste
-              h3.title 口感
-              = simple_format @wine.taste
-            - if @wine.opinion
-              h3.title 我的評語
-              = simple_format @wine.opinion
+            .tabbable
+              ul.nav.nav-tabs
+                - if @wine.place
+                  li= link_to "品酒地點", "#place", data: { toggle: 'tab' }
+                - if @wine.appearance
+                  li= link_to "外觀", "#appearance", data: { toggle: 'tab' }
+                - if @wine.nose
+                  li= link_to "香氣", "#nose", data: { toggle: 'tab' }
+                - if @wine.taste
+                  li= link_to "口感", "#taste", data: { toggle: 'tab' }
+                - if @wine.opinion
+                  li= link_to "我的筆記", "#opinion", data: { toggle: 'tab' }
+              .tab-content
+                - if @wine.place
+                  .tab-pane#place
+                    = simple_format @wine.place
+                - if @wine.appearance
+                  .tab-pane#appearance
+                    = simple_format @wine.appearance
+                - if @wine.nose
+                  .tab-pane#nose
+                    = simple_format @wine.nose
+                - if @wine.taste
+                  .tab-pane#taste
+                    = simple_format @wine.taste
+                - if @wine.opinion
+                  .tab-pane#opinion
+                    = simple_format @wine.opinion
   .sidebar-content.span3
     .row
       .list-menu.box-wrapper.span3
