@@ -1,0 +1,92 @@
+.row
+  .box-wrapper.span9
+    .row
+      .box-content-widget.span9
+        .row
+          .title.bg-title.span9
+            h3= @wine.name
+        .widget
+          .widget-content
+            .row-fluid
+              .span7
+                = image_tag("http://placehold.it/400x400", class: 'border-rd4')
+              .span5
+                ul.wine-info
+                  - if @wine.vintage
+                    li
+                      .overflow-hidden
+                        span.wine-property-label 年份
+                        span.wine-property= @wine.vintage
+                  - if @wine.producer
+                    li
+                      .overflow-hidden
+                        span.wine-property-label 酒莊
+                        span.wine-property= link_to @wine.producer_name, @wine.producer
+                  - if @wine.region
+                    li
+                      .overflow-hidden
+                        span.wine-producer-label 產地
+                        span.wine-property= @wine.region
+                  - if @wine.serving_temperature_from || @wine.serving_temperature_to
+                    li
+                      .overflow-hidden
+                        span.wine-producer-label 適飲溫度
+                        span.wine-property= @wine.serving_temperature_range
+                  - if @wine.suggested_glass
+                    li
+                      .overflow-hidden
+                        span.wine-producer-label 適用酒杯
+                        span.wine-property= t(@wine.suggested_glass, scope: 'activerecord.options.suggested_glasses')
+                  - if @wine.price
+                    li
+                      .overflow-hidden
+                        span.wine-producer-label 價格
+                        span.wine-property= @wine.price
+        .widget
+          .widget-content
+            - if @wine.place
+              h3.title 品酒地點
+              = @wine.place
+            - if @wine.appearance
+              h3.title 外觀
+              = simple_format @wine.appearance
+            - if @wine.nose
+              h3.title 香氣
+              = simple_format @wine.nose
+            - if @wine.taste
+              h3.title 口感
+              = simple_format @wine.taste
+            - if @wine.opinion
+              h3.title 我的評語
+              = simple_format @wine.opinion
+  .sidebar-content.span3
+    .row
+      .list-menu.box-wrapper.span3
+        .row
+          .title.bg-title.span3
+            h3 推薦筆記
+        ul.thumbnails.thumbnails-horizontal
+          li.span3
+            .thumbnail.border-radius-top
+              .bg-thumbnail-img
+                = image_tag("http://placehold.it/200x200", class: 'border-radius-top')
+              h5 some other wine
+            .box.border-radius-bottom
+              p
+                span.title_torrent.pull-left Wine
+          li.span3
+            .thumbnail.border-radius-top
+              .bg-thumbnail-img
+                = image_tag("http://placehold.it/200x160", class: 'border-radius-top')
+              h5 some other wine
+            .box.border-radius-bottom
+              p
+                span.title_torrent.pull-left Wine
+          li.span3
+            .thumbnail.border-radius-top
+              .bg-thumbnail-img
+                = image_tag("http://placehold.it/200x160", class: 'border-radius-top')
+              h5 some other wine
+            .box.border-radius-bottom
+              p
+                span.title_torrent.pull-left Wine

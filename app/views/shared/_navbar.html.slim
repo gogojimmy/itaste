@@ -9,19 +9,20 @@
           li
             a href="index.html"
           li.divider-vertical
+          li.avatar_small
+            a href="#"
           - if current_user
             li.dropdown
               a.dropdown-toggle data-toggle="dropdown" href="#"
               | #{current_user.username}
-              b.caret
-            ul.dropdown-menu
-              li= link_to user_path(current_user) do
-                i.icon-user
-                | Account Setting
-              li.divider
-              li= link_to signout_path, :id => "sign_out" do
-                i.icon-off
-                | 登出
+              ul.dropdown-menu
+                li= link_to user_path(current_user) do
+                  i.icon-user
+                  | Account Setting
+                li.divider
+                li= link_to signout_path, :id => "sign_out" do
+                  i.icon-off
+                  | 登出
           - else
             li
               a#signin-btn-in-nav href="/signin" 登入

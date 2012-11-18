@@ -1,6 +1,8 @@
 body {
 	color:#ddd;
 	background:#33363B;
+  font-size: 14px;
+  line-height: 1.7em;
 }
 
 /************ Custom **************/
@@ -362,7 +364,6 @@ border-bottom-color: #999;
 	margin-left:7px;
 	width:200px;
 	overflow:hidden;
-	height:20px;
 }
 .thumbnails-horizontal img{
 	width:200px;
@@ -374,7 +375,7 @@ border-bottom-color: #999;
 .thumbnails .number-view {
 	border-left:1px solid #45484c;
 	color:#ccc;
-	font-size:11px;
+	font-size:14px;
 	padding-left:10px;
 }
 .box  {
@@ -392,15 +393,15 @@ border-bottom-color: #999;
 	float:left;
 }
 .thumbnails-vertical .thumbnail h5 {
-	margin:0px 0px 5px 0px;
-	width:150px;
+	margin:0px 0px 0px 0px;
+	width:230px;
 	overflow:hidden;
 	height:36px;
 }
 .thumbnails-vertical .thumbnail-content-left{
 	float:left;
 	margin-left:10px;
-	width:150px;
+	width:230px;
 	color:#ccc;
 	overflow:hidden;
 	height:170px;
@@ -409,7 +410,7 @@ border-bottom-color: #999;
 	margin-top:15px;
 }
 .sort a{
-	font-size:11px;
+	font-size:14px;
 }
 .sort i{
 	margin-right:5px;
@@ -477,14 +478,14 @@ border-bottom-color: #999;
 .footer .logo-vt p{
 	padding:0px;
 	margin:0px;
-	font-size:12px;
+	font-size:14px;
 }
 .nav-list .nav-header {
 	text-shadow:none;
 	text-transform:lowercase;
 	text-transform:capitalize;
 	color:#fff;
-	font-size:16px;
+	font-size:14px;
 	font-weight:400;
 }
 .footer .nav-list > li > a{
@@ -513,7 +514,7 @@ border-bottom-color: #999;
 .login-content {
 	color:#ddd;
 	margin-top:10%;
-	font-size:11px;
+	font-size:14px;
 }
 .login-content .header-login{
 	background:#49AFCD;
@@ -546,7 +547,7 @@ border-bottom-color: #999;
 }
 .login-content .input{
 	width:96%;
-	font-size:11px;
+	font-size:14px;
 }
 .sign-up-lg{
 	margin:10px 0px 0px 0px;
@@ -668,7 +669,7 @@ border-bottom-color: #999;
 }
 .comment-data {
 	color:#555;
-	font-size:11px;
+	font-size:14px;
 }
 .comment-text-wrap{
 	float:left;
@@ -942,11 +943,3 @@ code {
 .plan-container {
 	* margin:0px 0.4%;
 }
-
-
-
-
-
-
-
-

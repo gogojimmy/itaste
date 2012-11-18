@@ -8,7 +8,11 @@ Itaste::Application.routes.draw do
   end
   match 'signout', to: 'sessions#destroy', as: 'signout'
 
-  resources :users, only: [:show]
+  resources :users do
+    resources :wines, only: [:index]
+  end
+  resources :wines
+  resources :producers, only: [:index, :show]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -1,0 +1,33 @@
+= simple_form_for @wine, html: { class: 'form-horizontal' } do |f|
+  .box-form.widget
+    .widget-content
+      .title
+        h3 有關酒
+      = f.input :name, label: "酒名", placeholder: "例如：Romanee-Conti"
+      = f.input :wine_type, label: "種類", collection: collection_for_wine_type, :as => :radio_buttons, :item_wrapper_class => 'inline'
+      = f.input :vintage, label: "年份", as: :select, collection: 1950..Time.now.year
+      = f.input :alcohol, label: "酒精濃度"
+      = f.input :producer_name, label: "酒莊", input_html: { class: 'producer-picker', data: { autocomplete_source: producers_path(format: :json) } }
+      = f.input :region_id, label: "產區" do
+        = f.grouped_collection_select :region_id, Region.root_only, :children, :name, :id, :name, :include_blank => true
+      = f.input :suggested_glass, label: "適用酒杯", collection: collection_for_suggested_glass, :as => :radio_buttons, :item_wrapper_class => 'inline'
+      .control-group
+        label.control-label 適飲溫度
+        .controls
+          #serving-temperature-range-ui.span5
+          span#serving_temperature_range.help-inline
+      = f.input :price, label: "價格"
+      = f.input :when, label: "品酒日期", as: :string, input_html: { class: 'date-picker' }
+      = f.input :serving_temperature_from, as: :hidden, input_html: { id: 'serving_temperature_from' }
+      = f.input :serving_temperature_to, as: :hidden, input_html: { id: 'serving_temperature_to' }
+  .box-form.widget
+    .widget-content
+      .title
+        h3 我的筆記
+      = f.input :appearance, label: "外觀", input_html: { class: 'span8', rows: 10 }
+      = f.input :nose, label: "香氣", input_html: { class: 'span8', rows: 10 }
+      = f.input :taste, label: "口感", input_html: { class: 'span8', rows: 10 }
+      = f.input :opinion, label: "想法", input_html: { class: 'span8', rows: 10 }
+  .form-actions
+    = f.button :submit, "送出", :class => 'btn btn-primary'
+    = submit_tag '取消', :type => :reset, :class => 'btn btn-danger'
