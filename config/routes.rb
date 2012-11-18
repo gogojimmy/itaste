@@ -11,10 +11,15 @@ Itaste::Application.routes.draw do
   resources :users do
     resources :wines, only: [:index]
   end
-  resources :wines
+  resources :wines do
+    collection do
+      get :create_wine, as: :create_wine
+    end
+  end
   resources :producers, only: [:index, :show]
   resources :foods, only: [:index]
   resources :grapes, only: [:index]
+  resources :photos
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -1,0 +1,15 @@
+.box-form.widget
+  .widget-content
+    .title
+      h3 圖片
+    ul#photos.thumbnails
+      = render @wine.photos
+    = form_for @wine.photos.build do |f|
+      = f.label :image, "上傳照片: "
+      = f.file_field :image, multiple: true, name: "photo[image]"
+      = f.hidden_field :wine_id, valud: @wine.id
+    script#template-upload type="text/x-tmpl"
+      .upload
+        | {%=o.name%}
+        .progress
+          .bar style="width: 0%;"

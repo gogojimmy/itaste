@@ -16,6 +16,8 @@ gem 'awesome_print'
 gem 'pry'
 gem 'pry-remote'
 gem 'pry-nav'
+gem "rmagick"
+gem "carrierwave"
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -28,6 +30,7 @@ group :assets do
   gem 'font-awesome-rails'
   gem 'jquery-ui-rails'
   gem 'jquery-tokeninput-rails'
+  gem 'jquery-fileupload-rails'
 end
 
 gem 'jquery-rails'

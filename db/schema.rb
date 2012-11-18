@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121118040311) do
+ActiveRecord::Schema.define(:version => 20121118094435) do
 
   create_table "badges", :force => true do |t|
     t.string   "name"
@@ -46,6 +46,18 @@ ActiveRecord::Schema.define(:version => 20121118040311) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "photos", :force => true do |t|
+    t.string   "name"
+    t.string   "image"
+    t.integer  "wine_id"
+    t.boolean  "is_feature", :default => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+  end
+
+  add_index "photos", ["name"], :name => "index_photos_on_name"
+  add_index "photos", ["wine_id"], :name => "index_photos_on_wine_id"
 
   create_table "places", :force => true do |t|
     t.string   "name"

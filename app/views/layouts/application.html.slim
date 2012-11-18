@@ -13,16 +13,17 @@ head
     /! end navbar
     .main
       .container
-        .row
-          - flash.each do |name, msg|
-            .span12
-              .row
-                .widget
-                  .widget-content
-                    #alert
-                      div{class="alert alert-#{name == :notice ? "success" : "error"}"}
-                        a.close data-dismiss="alert" &times;
-                        = simple_format(msg)
+        - if flash.present?
+          .row
+            - flash.each do |name, msg|
+              .span12
+                .row
+                  .widget
+                    .widget-content
+                      #alert
+                        div{class="alert alert-#{name == :notice ? "success" : "error"}"}
+                          a.close data-dismiss="alert" &times;
+                          = simple_format(msg)
         = yield
     hr
     = render 'shared/footer'

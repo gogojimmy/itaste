@@ -31,3 +31,25 @@ jQuery ->
 
   $(".nav-tabs li:first").addClass 'active'
   $(".tab-content .tab-pane:first").addClass 'active'
+
+  $("#new_photo").fileupload
+    dataType: "script"
+    add: (e, data) ->
+      types = /(\.|\/)(gif|jpe?g|png)$/i
+      file = data.files[0]
+      if types.test(file.type) || types.test(file.name)
+        data.context = $(tmpl("template-upload", file))
+        $('#new_photo').append(data.context)
+        data.submit()
+      else
+        alert("#{file.name} 並不是 gif, jpeg, 或 png 等支援的圖片格式")
+    progress: (e, data) ->
+      if data.context
+        progress = parseInt(data.loaded / data.total * 100, 10)
+        data.context.find('.bar').css('width', progress + '%')
+
+  $("#fileupload").bind "fileuploadalways", (e, data) ->
+    setTimeout (->
+      $("div.template-download.fade").fadeOut()
+    ), 3000
+

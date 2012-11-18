@@ -14,18 +14,23 @@ class WinesController < ApplicationController
     end
   end
 
-  def new
-    @wine = current_user.wines.build
+  def create_wine
+    @wine = Wine.create_without_validation
+    redirect_to edit_wine_path(@wine)
   end
 
-  def create
-    @wine = current_user.wines.build(params[:wine])
-    if @wine.save
-      redirect_to @wine, notice: "成功建立一則筆記"
-    else
-      render :new
-    end
-  end
+  #def new
+    #@wine = current_user.wines.build
+  #end
+
+  #def create
+    #@wine = current_user.wines.build(params[:wine])
+    #if @wine.save
+      #redirect_to @wine, notice: "成功建立一則筆記"
+    #else
+      #render :new
+    #end
+  #end
 
   def edit
     @wine = Wine.find(params[:id])

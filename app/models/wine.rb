@@ -13,12 +13,19 @@ class Wine < ActiveRecord::Base
   has_many :badges, through: :wine_badge_ship
   has_many :wine_food_ship
   has_many :foods, through: :wine_food_ship
+  has_many :photos
 
   validates_presence_of :name
   validates_presence_of :wine_type
 
   WINE_TYPE = %w{ red_wine white_wine champagne sparkling_wine }
   GLASS_TYPE = %w{ bordeaux_red_wine burgundy_red_wine bordeaux_white_wine burgundy_white_wine sparkling_wine dessert_wine }
+
+  def self.create_without_validation
+    wine = Wine.new
+    wine.save(validate: false)
+    wine
+  end
 
   def serving_temperature_range
     serving_temperature_from.to_s + "度 - " + serving_temperature_to.to_s + "度"

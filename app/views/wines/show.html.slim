@@ -9,7 +9,7 @@
           .widget-content
             .row-fluid
               .span7
-                = image_tag("http://placehold.it/400x400", class: 'border-rd4')
+                = image_tag(@wine.photos.feature_photo(:large), class: 'border-rd4')
               .span5
                 ul.wine-info
                   - if @wine.vintage
