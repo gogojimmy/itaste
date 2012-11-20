@@ -8,8 +8,8 @@
         ul.nav.pull-right
           li.divider-vertical
           - if current_user
-            li.avatar_small
-              a href="#"
+            li
+              = avatar_image(current_user, :thumb, 'nav-avatar')
             li.dropdown
               = link_to "#", data: { toggle: 'dropdown', class: 'dropdown-toggle' } do
                 | #{current_user.username}

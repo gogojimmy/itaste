@@ -131,6 +131,8 @@ ActiveRecord::Schema.define(:version => 20121120170554) do
     t.string   "facebook_token"
     t.datetime "facebook_expires_at"
     t.string   "avatar"
+    t.string   "avatar_tmp"
+    t.boolean  "avatar_processing"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
