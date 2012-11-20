@@ -1,11 +1,5 @@
-li class="photo-#{photo.id}-block span3"
-  .thumbnail.border-radius-top
-    .bg-thumbnail-img
-      = image_tag(photo.image_url(:normal), class: "border-rd4 photo-#{photo.id} #{'feature' if photo.is_feature?}")
-    h5
-      a dkowkqd
-  .box.border-radius-bottom
-    p
-      - unless photo.is_feature?
-        span.pull-left id='set-feature-#{photo.id}'= link_to '設定為特色圖片', photo_set_feature_path(photo), method: :put, remote: true
-      span class='pull-right' id='photo-#{photo.id}-remove'= link_to '移除', photo_path(photo), method: :delete, confirm: '確定要刪除這張照片？', remote: true
+li class="photo-#{photo.id}-block"
+  = image_tag(photo.image_url(:normal), class: "border-rd4 photo-#{photo.id} #{'feature' if photo.is_feature?}")
+  .functions
+    span.pull-left id='set-feature-#{photo.id}'= link_to '設定為特色圖片', photo_set_feature_path(photo), method: :put, remote: true
+    span class='pull-right' id='photo-#{photo.id}-remove'= link_to '移除', photo_path(photo), method: :delete, confirm: '確定要刪除這張照片？', remote: true

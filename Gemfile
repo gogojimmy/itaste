@@ -15,9 +15,13 @@ gem 'exception_notification'
 gem 'awesome_print'
 gem 'rmagick'
 gem 'carrierwave'
-gem 'carrierwave_direct'
+gem 'carrierwave_backgrounder'
 gem 'fog'
 gem 'cells'
+gem 'delayed_job_active_record'
+gem 'daemons'
+gem "delayed_job_admin"
+gem 'koala'
 
 # Gems used only for assets and not required
 # in production environments by default.

@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
          :omniauthable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :username
   # attr_accessible :title, :body
   has_many :wines
 
@@ -17,6 +17,8 @@ class User < ActiveRecord::Base
       user.uid = auth.uid
       user.username = auth.info.name
       user.email = auth.info.email
+      user.facebook_token = auth.credentials.token
+      user.facebook_expires_at = Time.at(auth.credentials.expires_at)
     end
   end
 

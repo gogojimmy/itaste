@@ -1,3 +1,4 @@
 li class="photo-#{photo.id}-block"
-  = link_to photo_set_feature_path(photo), method: :put, remote: true do
-    = image_tag(photo.image_url(:thumb), class: "border-rd4 photo-#{photo.id}")
+  = image_tag(photo.image_url(:thumb), class: "border-rd4 photo-#{photo.id}")
+  .functions
+    = link_to '設定為特色圖片', photo_set_feature_path(photo), method: :put, remote: true
