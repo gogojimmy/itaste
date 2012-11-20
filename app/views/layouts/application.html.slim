@@ -1,14 +1,13 @@
 doctype html
 html lang="zh"
-head
-  title #{t('brand')} | #{@title}
-  meta content="text/html; charset=utf-8" http-equiv="Content-Type"
-  = stylesheet_link_tag    "application"
-  = javascript_include_tag "application"
-  = csrf_meta_tags
-  meta name="viewport" content="width=device-width" initial-scale="1.0"
-  meta charset="UTF-8"
-  body data-offset="50" data-spy="scroll" data-target=".subnav" data-twttr-rendered="true"
+  head
+    title #{t('brand')} | #{@title}
+    meta content="text/html; charset=utf-8" http-equiv="Content-Type"
+    = stylesheet_link_tag    "application"
+    = csrf_meta_tags
+    meta name="viewport" content="width=device-width" initial-scale="1.0"
+    meta charset="UTF-8"
+  body
     = render 'shared/navbar'
     /! end navbar
     .main
@@ -18,12 +17,11 @@ head
             - flash.each do |name, msg|
               .span12
                 .row
-                  .widget
-                    .widget-content
-                      #alert
-                        div{class="alert alert-#{name == :notice ? "success" : "error"}"}
-                          a.close data-dismiss="alert" &times;
-                          = simple_format(msg)
+                  #alert
+                    div{class="alert alert-#{name == :notice ? "success" : "error"}"}
+                      a.close data-dismiss="alert" &times;
+                      = simple_format(msg)
         = yield
     hr
     = render 'shared/footer'
+    = javascript_include_tag "application"

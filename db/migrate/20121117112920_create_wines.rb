@@ -18,6 +18,7 @@ class CreateWines < ActiveRecord::Migration
       t.text :nose
       t.text :taste
       t.text :opinion
+      t.boolean :complete, default: false
 
       t.timestamps
     end

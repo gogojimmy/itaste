@@ -1,5 +1,6 @@
 <% if @photo.new_record? %>
   alert("照片上傳失敗: <%= j @photo.errors.full_messages.join(', ').html_safe %>");
 <% else %>
-  $("#photos").append("<%= j render(@photo) %>");
+  $("#photos").append("<%= j render 'photo', :photo => @photo %>");
+  $("#photos-in-modal").append("<%= j render 'photo_modal', :photo => @photo %>");
 <% end %>

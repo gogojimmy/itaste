@@ -3,7 +3,7 @@
     .title
       h3 有關酒
     = simple_form_for @wine, html: { class: 'form-horizontal' } do |f|
-      = f.input :name, label: "酒名", placeholder: "例如：Romanee-Conti"
+      = f.input :name, label: "酒名", placeholder: "例如：Romanee-Conti", input_html: { class: 'wine-name-picker', data: { autocomplete_source: wines_path(format: :json) } }
       = f.input :wine_type, label: "種類", collection: collection_for_wine_type, :as => :radio_buttons, :item_wrapper_class => 'inline'
       = f.input :grape_tokens, label: "葡萄品種", as: :string, input_html: { class: 'span8', id: 'grape-token-input', data: { load: @wine.grapes } }
       = f.input :vintage, label: "年份", as: :select, collection: 1950..Time.now.year
@@ -12,6 +12,7 @@
       = f.input :region_id, label: "產區" do
         = f.grouped_collection_select :region_id, Region.root_only, :children, :name, :id, :name, :include_blank => true
       = f.input :suggested_glass, label: "適用酒杯", collection: collection_for_suggested_glass, :as => :radio_buttons, :item_wrapper_class => 'inline'
+      = f.input :food_tokens, label: "搭配餐點", as: :string, input_html: { class: 'span6', id: "food-token-input", data: { load: @wine.foods } }
       .control-group
         label.control-label 適飲溫度
         .controls
@@ -19,13 +20,12 @@
           span#serving_temperature_range.help-inline
       = f.input :price, label: "價格"
       = f.input :when, label: "品酒日期", as: :string, input_html: { class: 'date-picker' }
-      = f.input :serving_temperature_from, as: :hidden, input_html: { id: 'serving_temperature_from' }
-      = f.input :serving_temperature_to, as: :hidden, input_html: { id: 'serving_temperature_to' }
       = f.input :appearance, label: "外觀", input_html: { class: 'span6', rows: 10 }
       = f.input :nose, label: "香氣", input_html: { class: 'span6', rows: 10 }
       = f.input :taste, label: "口感", input_html: { class: 'span6', rows: 10 }
-      = f.input :food_tokens, label: "搭配餐點", as: :string, input_html: { class: 'span6', id: "food-token-input", data: { load: @wine.foods } }
       = f.input :opinion, label: "想法", input_html: { class: 'span6', rows: 10 }
+      = f.input :serving_temperature_from, as: :hidden, input_html: { id: 'serving_temperature_from' }
+      = f.input :serving_temperature_to, as: :hidden, input_html: { id: 'serving_temperature_to' }
       .form-actions
-        = f.button :submit, "送出", :class => 'btn btn-primary'
+        = f.submit "送出", class: 'btn btn-primary'
         = submit_tag '取消', :type => :reset, :class => 'btn btn-danger'

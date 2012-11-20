@@ -6,21 +6,20 @@
         span.cl-blue 筆記
       .nav-collapse
         ul.nav.pull-right
-          li
-            a href="index.html"
           li.divider-vertical
-          li.avatar_small
-            a href="#"
           - if current_user
+            li.avatar_small
+              a href="#"
             li.dropdown
-              a.dropdown-toggle data-toggle="dropdown" href="#"
-              | #{current_user.username}
+              = link_to "#", data: { toggle: 'dropdown', class: 'dropdown-toggle' } do
+                | #{current_user.username}
+                b.caret
               ul.dropdown-menu
                 li= link_to user_path(current_user) do
                   i.icon-user
                   | Account Setting
                 li.divider
-                li= link_to signout_path, :id => "sign_out" do
+                li= link_to signout_path, :id => "sign_out", method: :delete do
                   i.icon-off
                   | 登出
           - else

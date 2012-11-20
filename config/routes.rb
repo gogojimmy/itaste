@@ -1,5 +1,5 @@
 Itaste::Application.routes.draw do
-  root :to => "welcome#index"
+  root :to => "wines#index"
   devise_for :users, path_names: {sign_in: "login", sign_out: "logout"}, :skip => [:sessions], controllers: {omniauth_callbacks: "omniauth_callbacks"}
   devise_scope :user do
     get 'signin' => 'devise/sessions#new', :as => :new_user_session
@@ -19,7 +19,9 @@ Itaste::Application.routes.draw do
   resources :producers, only: [:index, :show]
   resources :foods, only: [:index]
   resources :grapes, only: [:index]
-  resources :photos
+  resources :photos do
+    put :set_feature
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

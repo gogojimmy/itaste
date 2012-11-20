@@ -10,12 +10,20 @@ class WinesController < ApplicationController
     if params[:user_id]
       @wines = @user.wines.paginate(page: params[:page])
     else
-      @wines = Wine.paginate(page: params[:page])
+      if params[:format] == 'json'
+        @wines = Wine.order(:name).where("name like ?", "%#{params[:term]}%")
+      else
+        @wines = Wine.paginate(page: params[:page])
+      end
+      respond_to do |format|
+        format.html
+        format.json { render :json => @wines.map(&:name) }
+      end
     end
   end
 
   def create_wine
-    @wine = Wine.create_without_validation
+    @wine = Wine.find_uncomplete_or_create_without_validation(current_user)
     redirect_to edit_wine_path(@wine)
   end
 

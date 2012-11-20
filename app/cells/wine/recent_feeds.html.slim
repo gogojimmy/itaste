@@ -1,0 +1,7 @@
+.box-wrapper.span12
+  .row
+    .title.span12
+      h2.pull-left 最近社群上新增的筆記
+  ul.thumbnails.thumbnails-horizontal
+    - @feeds.each do |feed|
+      = render_cell :wine, :vertical_wine_component, feed

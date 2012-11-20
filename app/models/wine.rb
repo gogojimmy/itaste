@@ -18,13 +18,13 @@ class Wine < ActiveRecord::Base
   validates_presence_of :name
   validates_presence_of :wine_type
 
+  scope :uncomplete, where(complete: false)
+
   WINE_TYPE = %w{ red_wine white_wine champagne sparkling_wine }
   GLASS_TYPE = %w{ bordeaux_red_wine burgundy_red_wine bordeaux_white_wine burgundy_white_wine sparkling_wine dessert_wine }
 
-  def self.create_without_validation
-    wine = Wine.new
-    wine.save(validate: false)
-    wine
+  def self.find_uncomplete_or_create_without_validation(user)
+    wine = user.wines.uncomplete.first || self.create_without_validation
   end
 
   def serving_temperature_range
@@ -46,4 +46,13 @@ class Wine < ActiveRecord::Base
   def grape_tokens=(tokens)
     self.grape_ids = Grape.ids_from_tokens(tokens)
   end
+
+  private
+
+  def self.create_without_validation
+    wine = Wine.new
+    wine.save(validate: false)
+    wine
+  end
+
 end

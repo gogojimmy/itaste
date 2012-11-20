@@ -166,8 +166,9 @@ ActiveRecord::Schema.define(:version => 20121118094435) do
     t.text     "nose"
     t.text     "taste"
     t.text     "opinion"
-    t.datetime "created_at",                                             :null => false
-    t.datetime "updated_at",                                             :null => false
+    t.boolean  "complete",                                               :default => false
+    t.datetime "created_at",                                                                :null => false
+    t.datetime "updated_at",                                                                :null => false
   end
 
   add_index "wines", ["name"], :name => "index_wines_on_name"

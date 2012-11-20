@@ -13,11 +13,11 @@ gem 'simple_form'
 gem 'omniauth-facebook'
 gem 'exception_notification'
 gem 'awesome_print'
-gem 'pry'
-gem 'pry-remote'
-gem 'pry-nav'
-gem "rmagick"
-gem "carrierwave"
+gem 'rmagick'
+gem 'carrierwave'
+gem 'carrierwave_direct'
+gem 'fog'
+gem 'cells'
 
 # Gems used only for assets and not required
 # in production environments by default.

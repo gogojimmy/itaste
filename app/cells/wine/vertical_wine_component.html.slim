@@ -1,0 +1,10 @@
+li.span3
+  .thumbnail.border-radius-top
+    .bg-thumbnail-img
+      = link_to image_tag(@vertical_wine_component.photos.feature_photo(:normal), class: 'border-rd4'), wine
+    .thumbnail-content-left
+      h3= link_to @vertical_wine_component.name, @vertical_wine_component
+      span= simple_format(@vertical_wine_component.opinion)
+  .box.border-radius-bottom
+    p
+      span.title_torrent.pull-left= t(@vertical_wine_component.wine_type, scope: 'activerecord.options.wine_types')

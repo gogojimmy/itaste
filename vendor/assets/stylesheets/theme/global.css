@@ -1,8 +1,5 @@
 body {
 	color:#ddd;
-	background:#33363B;
-  font-size: 14px;
-  line-height: 1.7em;
 }
 
 /************ Custom **************/
@@ -102,7 +99,6 @@ box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
 -ms-transition: border linear 0.2s, box-shadow linear 0.2s;
 -o-transition: border linear 0.2s, box-shadow linear 0.2s;
 transition: border linear 0.2s, box-shadow linear 0.2s;
-color:#E17931;
 }
 /************ style-button **************/
 .style-button {
@@ -258,7 +254,6 @@ border-color: #18191c;
 	color:#08C;
 }
 .navbar-fixed-top .nav .avatar_small a{
-	background:url("/assets/avatar-small.png") left 7px no-repeat;
 	height:20px;
 	width:10px;
 	margin-right:-15px;
@@ -367,7 +362,7 @@ border-bottom-color: #999;
 }
 .thumbnails-horizontal img{
 	width:200px;
-	height:160px;
+	height:200px;
 }
 .thumbnails .box{
 	padding:10px 10px 3px;
@@ -386,7 +381,7 @@ border-bottom-color: #999;
     margin-right: 5px;
 }
 .thumbnails-vertical .thumbnail{
-	height:170px;
+	height:200px;
 }
 .thumbnails-vertical .thumbnail > img {
 	margin:5px;
@@ -404,7 +399,7 @@ border-bottom-color: #999;
 	width:230px;
 	color:#ccc;
 	overflow:hidden;
-	height:170px;
+	height:200px;
 }
 .sort {
 	margin-top:15px;

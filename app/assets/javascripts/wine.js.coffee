@@ -5,6 +5,9 @@ jQuery ->
   $(".producer-picker").autocomplete
     source: $(".producer-picker").data('autocomplete-source')
 
+  $(".wine-name-picker").autocomplete
+    source: $(".wine-name-picker").data('autocomplete-source')
+
   $("#serving_temperature_range").text ($("#serving_temperature_from").val | 15) + "度 - " + ($("#serving_temperature_to").val | 17) + "度"
 
   $("#serving-temperature-range-ui").slider
@@ -43,13 +46,16 @@ jQuery ->
         data.submit()
       else
         alert("#{file.name} 並不是 gif, jpeg, 或 png 等支援的圖片格式")
+
     progress: (e, data) ->
       if data.context
         progress = parseInt(data.loaded / data.total * 100, 10)
         data.context.find('.bar').css('width', progress + '%')
 
-  $("#fileupload").bind "fileuploadalways", (e, data) ->
-    setTimeout (->
-      $("div.template-download.fade").fadeOut()
-    ), 3000
+    done: (e, data) ->
+      data.context.remove() if data.context # remove progress bar
 
+    fail: (e, data) ->
+      alert("#{data.files[0].name} 上傳失敗.")
+      console.log("Upload failed:")
+      console.log(data)
