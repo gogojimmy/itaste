@@ -1,29 +1,24 @@
-.row
-  .title.bg-title.span3
-    h3 圖片
-ul#photos.thumbnails.thumbnails-horizontal
-  = render @wine.photos
-  li.span3
-    .well
-      = link_to(image_tag(asset_path('photo-placeholder.jpg'), class: 'border-rd4', id: 'upload-photo-placeholder'), "#upload-modal", id: 'upload-photo-link', data: { toggle: 'modal'})
-  #upload-modal.modal.hide.fade
-    .modal-header
-      buton.close type='button' data-dismiss='modal' aria-hidden='true' &times;
-      h3 上傳照片
-    .modal-body
-      ul#photos-in-modal
-        - @wine.photos.each do |photo|
-          = render 'photos/photo_modal', :photo => photo
-      = form_for @wine.photos.build do |f|
-        = f.file_field :image, multiple: true, name: "photo[image]"
-        = f.hidden_field :wine_id, valud: @wine.id
-      .upload-progress
-        script#template-upload type="text/x-tmpl"
-          .upload
-            | {%=o.name%}
-            .progress.progress-success.progress-striped.active
-              .bar style="width: 0%;"
-    .modal-footer
-      span 上傳檔案限制為 5MB 以下之 jpg, jpeg, png 格式圖片。
-      br
-      span 選擇上傳照片時按住 Shift 不放可選擇多張。
+.box-form.widget
+  .widget-content
+    .title
+      h3 圖片
+    ul#photos.thumbnails
+      = render @wine.photos
+    = link_to "上傳照片", "#upload-modal", class:'btn btn-primary', data: { toggle: 'modal' }
+    #upload-modal.modal.hide.fade
+      .modal-header
+        buton.close type='button' data-dismiss='modal' aria-hidden='true' &times;
+        h3 上傳照片
+      .modal-body
+        ul#photos-in-modal.thumbnails
+          - @wine.photos.each do |photo|
+            = render 'photos/photo_modal', :photo => photo
+        = form_for @wine.photos.build do |f|
+          = f.file_field :image, multiple: true, name: "photo[image]"
+          = f.hidden_field :wine_id, valud: @wine.id
+        .upload-progress
+          script#template-upload type="text/x-tmpl"
+            .upload
+              | {%=o.name%}
+              .progress.progress-success.progress-striped.active
+                .bar style="width: 0%;"
