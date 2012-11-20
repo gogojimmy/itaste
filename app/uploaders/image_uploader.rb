@@ -25,22 +25,27 @@ class ImageUploader < CarrierWave::Uploader::Base
   end
 
   version :thumb do
-    process :resize_to_fit => [120, 120]
+    process :resize_to_fill => [120, 120]
+    process :quality => 100
   end
 
   version :small do
-    process :resize_to_fit => [160, 160]
+    process :resize_to_fill => [160, 160]
+    process :quality => 100
   end
 
   version :normal do
-    process :resize_to_fit => [200, 200]
+    process :resize_to_fill => [200, 200]
+    process :quality => 100
   end
 
   version :large do
-    process :resize_to_fit => [390, 390]
+    process :resize_to_fill => [390, 390]
+    process :quality => 100
   end
 
   version :xlarge do
-    process :resize_to_fit => [612, 612]
+    process :resize_to_fill => [612, 612]
+    process :quality => 100
   end
 end
