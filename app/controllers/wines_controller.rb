@@ -7,19 +7,20 @@ class WinesController < ApplicationController
   end
 
   def index
-    if params[:user_id]
-      @wines = @user.wines.paginate(page: params[:page])
+    if params[:format] == 'json'
+      @wines = Wine.completed.order(:name).where("name like ?", "%#{params[:term]}%")
     else
-      if params[:format] == 'json'
-        @wines = Wine.order(:name).where("name like ?", "%#{params[:term]}%")
-      else
-        @wines = Wine.paginate(page: params[:page])
-      end
-      respond_to do |format|
-        format.html
-        format.json { render :json => @wines.map(&:name) }
-      end
+      @wines = Wine.completed.paginate(page: params[:page])
     end
+    respond_to do |format|
+      format.html
+      format.json { render :json => @wines.map(&:name) }
+    end
+  end
+
+  def notes
+    @user = User.find(params[:user_id])
+    @wines = @user.wines.completed.paginate(page: params[:page], per_page: 20)
   end
 
   def create_wine
@@ -42,10 +43,13 @@ class WinesController < ApplicationController
 
   def edit
     @wine = Wine.find(params[:id])
+    redirect_to @wine, notice: '你沒有權限編輯這個項目' unless current_user.has_permission?(@wine)
   end
 
   def update
     @wine = Wine.find(params[:id])
+    redirect_to @wine, notice: '你沒有權限編輯這個項目' unless current_user.has_permission?(@wine)
+
     if @wine.update_attributes(params[:wine])
       redirect_to @wine, notice: "成功更新了#{@wine.name}"
     else
@@ -55,8 +59,10 @@ class WinesController < ApplicationController
 
   def destroy
     @wine = Wine.find(params[:id])
+    redirect_to @wine, notice: '你沒有權限編輯這個項目' unless current_user.has_permission?(@wine)
+
     name = @wine.name
     @wine.destroy
-    redirect_to user_wines_path(current_user), notice: "成功刪除了#{name}"
+    redirect_to user_notes_path(current_user), notice: "成功刪除了#{name}"
   end
 end

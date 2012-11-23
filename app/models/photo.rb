@@ -7,7 +7,12 @@ class Photo < ActiveRecord::Base
 
   def self.feature_photo(version = :normal)
     photo = where(is_feature: true).first || self.first
-    photo.image_url(version)
+    if photo.present?
+      photo.image_url(version)
+    else
+      "fallback/" + [version.to_s, "default.png"].compact.join('_')
+    end
+
   end
 
   def set_as_feature

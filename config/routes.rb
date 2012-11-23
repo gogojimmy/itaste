@@ -9,7 +9,7 @@ Itaste::Application.routes.draw do
   match 'signout', to: 'sessions#destroy', as: 'signout'
 
   resources :users do
-    resources :wines, only: [:index]
+    get '/notes', to: "wines#notes"
   end
   resources :wines do
     collection do
@@ -18,7 +18,9 @@ Itaste::Application.routes.draw do
   end
   resources :producers, only: [:index, :show]
   resources :foods, only: [:index]
+  resources :regions, only: [:index]
   resources :grapes, only: [:index]
+  resources :places, only: [:index]
   resources :photos do
     put :set_feature
   end

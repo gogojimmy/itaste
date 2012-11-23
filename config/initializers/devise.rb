@@ -231,5 +231,5 @@ Devise.setup do |config|
   # config.omniauth_path_prefix = "/my_engine/users/auth"
 
   OMNIAUTH_CONFIG = YAML.load(File.open("#{Rails.root}/config/omniauth.yml"))[Rails.env]
-  config.omniauth :facebook, OMNIAUTH_CONFIG['facebook']['app_id'], OMNIAUTH_CONFIG['facebook']['secret_key'], scope: 'email,read_friendlists,publish_checkins,publish_stream,publish_stream,manage_pages'
+  config.omniauth :facebook, OMNIAUTH_CONFIG['facebook']['app_id'], OMNIAUTH_CONFIG['facebook']['secret_key'], scope: 'email,read_friendlists,publish_checkins,publish_stream,publish_stream', display: 'popup'
 end

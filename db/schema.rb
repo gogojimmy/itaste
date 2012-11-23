@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121120170554) do
+ActiveRecord::Schema.define(:version => 20121121174026) do
 
   create_table "badges", :force => true do |t|
     t.string   "name"
@@ -100,12 +100,12 @@ ActiveRecord::Schema.define(:version => 20121120170554) do
 
   create_table "regions", :force => true do |t|
     t.string   "name"
-    t.integer  "parent_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
-  add_index "regions", ["parent_id"], :name => "index_regions_on_parent_id"
+  add_index "regions", ["name"], :name => "index_regions_on_name"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "",    :null => false
@@ -191,6 +191,7 @@ ActiveRecord::Schema.define(:version => 20121120170554) do
     t.text     "nose"
     t.text     "taste"
     t.text     "opinion"
+    t.integer  "rating",                                                 :default => 3
     t.boolean  "complete",                                               :default => false
     t.datetime "created_at",                                                                :null => false
     t.datetime "updated_at",                                                                :null => false

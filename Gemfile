@@ -22,6 +22,7 @@ gem 'delayed_job_active_record'
 gem 'daemons'
 gem "delayed_job_admin"
 gem 'koala'
+gem 'meta-tags', :require => 'meta_tags'
 
 # Gems used only for assets and not required
 # in production environments by default.

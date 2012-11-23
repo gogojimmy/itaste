@@ -60,7 +60,7 @@ ul,li{
 .bg-title h3{
 	padding-left:10px;
 }
-.bg-title,.thumbnails .box {
+.bg-title,.thumbnails .box, .thumbnails .wine-box {
 	background:#17171b;
 	background-image: -ms-linear-gradient(top, #23242a, #17171b);
 	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#23242a), to(#17171b));
@@ -335,7 +335,7 @@ border-bottom-color: #999;
 }
 .thumbnails .bg-thumbnail-img {
 	width:200px;
-	height:160px;
+	height:200px;
 	text-align:center;
 	margin:5px 0px 10px 6px;
 	float:left;
@@ -360,11 +360,11 @@ border-bottom-color: #999;
 	width:200px;
 	overflow:hidden;
 }
-.thumbnails-horizontal img{
+.thumbnails-horizontal img.border-rd4{
 	width:200px;
 	height:200px;
 }
-.thumbnails .box{
+.thumbnails .box, .thumbnails .wine-box{
 	padding:10px 10px 3px;
 }
 .thumbnails .number-view {
@@ -381,7 +381,7 @@ border-bottom-color: #999;
     margin-right: 5px;
 }
 .thumbnails-vertical .thumbnail{
-	height:200px;
+	height:250px;
 }
 .thumbnails-vertical .thumbnail > img {
 	margin:5px;

@@ -1,13 +1,14 @@
 .navbar.navbar-fixed-top
   .navbar-inner
     .container
-      a.brand href="#"
+      a.brand href="/"
         span 品味
         span.cl-blue 筆記
       .nav-collapse
         ul.nav.pull-right
-          li.divider-vertical
           - if current_user
+            li= link_to '我的筆記', user_notes_path(current_user)
+            li.divider-vertical
             li
               = avatar_image(current_user, :thumb, 'nav-avatar')
             li.dropdown
@@ -15,16 +16,14 @@
                 | #{current_user.username}
                 b.caret
               ul.dropdown-menu
-                li= link_to user_path(current_user) do
-                  i.icon-user
-                  | Account Setting
+                li= link_to user_notes_path(current_user) do
+                  i.icon-dashboard
+                  | 我的筆記
                 li.divider
                 li= link_to signout_path, :id => "sign_out", method: :delete do
                   i.icon-off
                   | 登出
           - else
             li
-              a#signin-btn-in-nav href="/signin" 登入
-              ' 或
-              a#signup-btn-in-nav href="/users/sign_up" 註冊
+              = link_to '登入', user_omniauth_authorize_path(:facebook), id: 'signin-btn-in-nav'
               ' 來建立專屬於自己的品酒筆記

@@ -8,8 +8,8 @@ class CreateWines < ActiveRecord::Migration
       t.decimal :alcohol, :precision => 6, :scale => 5
       t.integer :producer_id
       t.integer :region_id
-      t.integer :serving_temperature_from
-      t.integer :serving_temperature_to
+      t.integer :serving_temperature_from, default: 15
+      t.integer :serving_temperature_to, default: 18
       t.string :suggested_glass
       t.float :price
       t.datetime :when
@@ -18,6 +18,7 @@ class CreateWines < ActiveRecord::Migration
       t.text :nose
       t.text :taste
       t.text :opinion
+      t.integer :rating, default: 95
       t.boolean :complete, default: false
 
       t.timestamps

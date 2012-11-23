@@ -10,23 +10,38 @@ class User < ActiveRecord::Base
   store_in_background :avatar
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :username, :avatar, :avatar_cache, :remove_avatar
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :username, :avatar, :avatar_cache, :remove_avatar, :facebook_token, :facebook_expires_at
   # attr_accessible :title, :body
   has_many :wines
 
-  validates_presence_of   :avatar
-  validates_integrity_of  :avatar
-  validates_processing_of :avatar
+
+  def has_permission?(subject)
+    subject.try(:user).try(:id) == self.id
+  end
+
+  def facebook
+    @facebook ||= Koala::Facebook::API.new(facebook_token)
+    block_given? ? yield(@facebook) : @facebook
+  rescue Koala::Facebook::APIError => e
+    logger.info e.to_s
+    nil # or consider a custom null object
+  end
+
+  def post_to_facebook(url)
+    facebook.put_connections("me", "itastetw:taste", wine: url)
+  end
 
   def self.from_omniauth(auth)
-    where(auth.slice(:provider, :uid)).first_or_create do |user|
+    user = where(auth.slice(:provider, :uid)).first_or_create do |user|
       user.provider = auth.provider
       user.uid = auth.uid
       user.username = auth.info.name
       user.email = auth.info.email
-      user.facebook_token = auth.credentials.token
-      user.facebook_expires_at = Time.at(auth.credentials.expires_at)
     end
+    user.facebook_token = auth.credentials.token
+    user.facebook_expires_at = Time.at(auth.credentials.expires_at)
+    user.save!
+    user
   end
 
   def self.new_with_session(params, session)
@@ -63,4 +78,5 @@ class User < ActiveRecord::Base
       user
     end
   end
+
 end

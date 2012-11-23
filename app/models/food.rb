@@ -7,7 +7,7 @@ class Food < ActiveRecord::Base
   def self.tokens(query)
     foods = where("name like ?", "%#{query}%")
     if foods.empty?
-      [{id: "<<<#{query}>>>", name: "新增: \"#{query}\""}]
+      [{id: "<<<#{query}>>>", name: "\"#{query}\""}]
     else
       foods
     end

@@ -1,0 +1,32 @@
+- set_meta_tags :title => "#{@user.username}的筆記", :description => '品味好酒、品味好書、品味好音樂、品味好電影、品味生活，然後與朋友分享，品味人生'
+- set_meta_tags :open_graph => { title: "#{@user.username}的筆記", type: 'Website', url: "http://#{request.host+request.fullpath}", image: "http://#{request.host}/assets/fallback/normal_default.png" }
+
+.row
+  .box-wrapper.span12
+    .row
+      .title.span12
+        h1.pull-left 我的筆記
+    ul.thumbnails.thumbnails-horizontal
+      - @wines.each do |wine|
+        li.span3
+          .thumbnail.border-radius-top
+            .avatar
+              = avatar_image(@user, :thumb, 'wine-avatar pull-left')
+              span.pull-right= l (wine.when || wine.updated_at), format: :mini
+              .clearfix
+            .bg-thumbnail-img
+              = link_to image_tag(wine.photos.feature_photo(:normal), class: 'border-rd4', alt: wine.name), wine
+            h5= link_to wine.name, wine
+          .box.border-radius-bottom
+            p
+              span.pull-left= t wine.wine_type, scope: 'activerecord.options.wine_types'
+              span.number-view.pull-right
+      li.span3
+          .thumbnail.border-radius-top
+            .bg-thumbnail-img
+              = link_to image_tag(asset_path('fallback/normal_default.png')), create_wine_wines_path
+            h5= link_to '新增一則筆記', create_wine_wines_path
+    .row
+      .span12
+        .pull-right
+          = will_paginate(@wines)

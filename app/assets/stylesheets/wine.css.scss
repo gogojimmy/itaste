@@ -1,3 +1,5 @@
+@import url(http://fonts.googleapis.com/css?family=Unica+One);
+
 ul.ui-autocomplete {
   position: absolute;
   list-style: none;
@@ -33,7 +35,7 @@ span#serving_temperature_range {
 
 .overflow-hidden { overflow: hidden; }
 
-ul.wine-info {
+ul.wine-info-list {
   li {
     border-bottom: 1px solid #CDCDCD;
     position: relative;
@@ -65,17 +67,6 @@ h1.show-title { padding-left: 10px; }
   background-color: black;
   .close { color: #ddd; }
 }
-
-/*#photos {*/
-  /*.widget-content {*/
-    /*height: 500px;*/
-    /*overflow: hidden;*/
-  /*}*/
-  /*ul.thumbnails {*/
-    /*overflow: scroll;*/
-    /*height: 500px;*/
-  /*}*/
-/*}*/
 
 #upload-modal {
   .modal-header {
@@ -118,4 +109,91 @@ h1.show-title { padding-left: 10px; }
 .feature {
   border: 5px solid green;
   margin: -5px;
+}
+
+.rating {
+  unicode-bidi: bidi-override;
+  direction: rtl;
+  font-size: 30px;
+  span {
+    font-family: FontAwesome;
+    font-weight: normal;
+    font-style: normal;
+    display: inline-block;
+    &:before {
+      content: "\f006";
+      padding-right: 5px;
+      color: #999;
+    }
+  }
+}
+
+.rating span:hover::before, .rating span:hover::before, .rating span:hover ~ span::before, .stared:before {
+  font-family: FontAwesome;
+  font-weight: normal;
+  font-style: normal;
+  display: inline-block;
+  content: "\f005";
+  color: #E3CF7A;
+  cursor: pointer;
+  padding-right: 5px;
+}
+
+.wine-box {
+	display:block;
+	height:40px;
+}
+
+.thumbnail {
+  .avatar {
+    margin-top: 5px;
+    margin-left: 6px;
+
+  }
+}
+
+.avatar {
+  span {
+    margin-left: 5px;
+    line-height: 2;
+ }
+}
+
+.title.bg-title {
+  .actions {
+    line-height: 3;
+    padding-right: 15px;
+  }
+}
+
+.wine {
+  .thumbnail-content-left {
+    p { line-height: 1.7em; }
+  }
+}
+
+.fb-comments, .fb-comments * {
+  width:100% !important;
+}
+
+#wine-page {
+  .wine-info {
+    height: 390px;
+    position: relative;
+    span.user-rating {
+      font-family: 'Unica One', cursive;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      font-size: 80px;
+      line-height: .7em;
+    }
+  }
+  .wine-photos {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    img {
+      margin-right: 5px;
+    }
+  }
 }

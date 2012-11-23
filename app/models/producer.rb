@@ -1,5 +1,4 @@
 class Producer < ActiveRecord::Base
-  attr_accessible :description, :name, :region_id, :lat, :lon
-  belongs_to :region
+  attr_accessible :description, :name, :lat, :lon
   has_many :wines
 end

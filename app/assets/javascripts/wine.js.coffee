@@ -2,11 +2,8 @@ jQuery ->
   $(".date-picker").datepicker
     dateFormat: 'yy-mm-dd'
 
-  $(".producer-picker").autocomplete
-    source: $(".producer-picker").data('autocomplete-source')
-
-  $(".wine-name-picker").autocomplete
-    source: $(".wine-name-picker").data('autocomplete-source')
+  $(".producer-picker, .wine-name-picker, .region-picker, .place-picker").autocomplete
+    source: $(this).data('autocomplete-source')
 
   $("#serving_temperature_range").text ($("#serving_temperature_from").val | 15) + "度 - " + ($("#serving_temperature_to").val | 17) + "度"
 
@@ -57,5 +54,14 @@ jQuery ->
 
     fail: (e, data) ->
       alert("#{data.files[0].name} 上傳失敗.")
+      data.context.remove() if data.context # remove progress bar
       console.log("Upload failed:")
-      console.log(data)
+      console.log(data.result)
+
+    $(".rating > span").click ->
+      $(this).nextAll().andSelf().each ->
+        $(this).addClass 'stared'
+
+    $("span.stared").click ->
+      $(this).nextAll().andSelf().each ->
+        $(this).removeClass 'stared'
