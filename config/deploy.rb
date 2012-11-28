@@ -6,17 +6,17 @@ require "delayed/recipes"
 require "rvm/capistrano"
 load 'deploy/assets'
 
-set :rvm_ruby_string, 'ruby-1.9.3-p125'
+set :rvm_ruby_string, ENV['GEM_HOME'].gsub(/.*\//,"")
 
-set :application, "set your application name here"
-set :repository,  "set your repository location here"
+set :application, "itaste"
+set :repository,  "git@github.com:gogojimmy/itaste.git"
 
 set :scm, :git
 set :scm_verbose, true
 set :use_sudo, false
 
 set :stages, %(staging production)
-set :default_stage, "staging"
+set :default_stage, "production"
 #set :rails_env, "production" #added for delayed job
 
 default_run_options[:pty] = true
@@ -41,24 +41,20 @@ namespace :deploy do
     run "cd #{current_path}; rake db:reset RAILS_ENV=#{rails_env}"
   end
 
-  task :copy_old_sitemap do
-    run "if [ -e #{previous_release}/public/sitemap_index.xml.gz ]; then cp #{previous_release}/public/sitemap* #{current_release}/public/; fi"
-  end
-
-  namespace :assets do
-    task :precompile, :roles => :web, :except => { :no_release => true } do
-      from = source.next_revision(current_revision)
-      if capture("cd #{latest_release} && #{source.local.log(from)} vendor/assets/ app/assets/ | wc -l").to_i > 0
-        run_locally "bundle exec rake assets:precompile"
-        find_servers_for_task(current_task).each do |server|
-          run_locally "rsync -vr --exclude='.DS_Store' public/assets #{user}@#{server.host}:#{shared_path}/"
-        end
-        run_locally "rm -rf public/assets/*"
-      else
-        logger.info "Skipping asset pre-compilation because there were no asset changes"
-      end
-    end
-  end
+  #namespace :assets do
+    #task :precompile, :roles => :web, :except => { :no_release => true } do
+      #from = source.next_revision(current_revision)
+      #if capture("cd #{latest_release} && #{source.local.log(from)} vendor/assets/ app/assets/ | wc -l").to_i > 0
+        #run_locally "bundle exec rake assets:precompile"
+        #find_servers_for_task(current_task).each do |server|
+          #run_locally "rsync -vr --exclude='.DS_Store' public/assets #{user}@#{server.host}:#{shared_path}/"
+        #end
+        #run_locally "rm -rf public/assets/*"
+      #else
+        #logger.info "Skipping asset pre-compilation because there were no asset changes"
+      #end
+    #end
+  #end
 end
 
 task :tail_log, :roles => :app do
@@ -95,10 +91,6 @@ namespace :mysql do
     `#{mysql_cmd} -e "drop database #{database}; create database #{database}"`
     `#{mysql_cmd} #{database} < #{local_filename}`
   end
-end
-
-task :refresh_sitemaps do
-  run "cd #{latest_release} && RAILS_ENV=#{rails_env} rake sitemap:refresh"
 end
 
 before "deploy:assets:precompile", "deploy:custom_setup"

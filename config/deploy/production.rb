@@ -1,6 +1,6 @@
 set :rails_env, "production"
-set :user, "deployer"
-set :domain, "example.com"
+set :user, "itaste"
+set :domain, "itaste.tw"
 set :branch, "master"
 
 server "#{domain}", :web, :app, :db, :primary => true
