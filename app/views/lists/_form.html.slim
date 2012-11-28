@@ -1,0 +1,24 @@
+= simple_form_for @list, html: { class: 'form-horizontal' } do |f|
+  = f.input :name, label: '酒單名稱'
+  .list-edit-form
+    .well
+      ul#list-area.sortable
+        - @list.wines.each do |wine|
+          li.span2
+            .thumbnail.border-radius-top
+              .bg-thumbnail-img
+                = image_tag(wine.photos.feature_photo(:thumb), class: 'border-rd4')
+              h5= wine.name
+    h2 將下方的酒拖拉至上方以建立酒單
+    .well
+      ul#choosable-wines.sortable
+        - current_user.wines.each do |wine|
+          li.span2 data-id="#{wine.id}"
+            .thumbnail.border-radius-top
+              .bg-thumbnail-img
+                = image_tag(wine.photos.feature_photo(:thumb), class: 'border-rd4')
+              h5= wine.name
+  = f.association :wines, as: :hidden
+  .form-actions
+    = button_tag '送出', class: 'btn btn-primary', id: 'list-form-btn'
+

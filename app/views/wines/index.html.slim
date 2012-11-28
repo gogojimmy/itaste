@@ -1,0 +1,29 @@
+- set_meta_tags :title => '在品味筆記上所有的好品味', :description => '品味好酒、品味好書、品味好音樂、品味好電影、品味生活，然後與朋友分享，品味人生'
+- set_meta_tags :open_graph => { title: '在品味筆記上所有的好品味', type: 'Website', url: "http://#{request.host+request.fullpath}", image: "http://#{request.host}/assets/fallback/normal_default.png" }
+.row
+  .box-wrapper.span12
+    .row
+      .title.span12
+        h1.pull-left 大家都在喝
+    ul.thumbnails.thumbnails-vertical
+      - @wines.each do |wine|
+        li.wine.span6
+          .thumbnail.border-radius-top
+            .avatar
+              = avatar_image(wine.user, :thumb, 'wine-avatar pull-left')
+              span #{wine.user.username}
+              span.pull-right= l (wine.when || wine.updated_at), format: :mini
+              .clearfix
+            .bg-thumbnail-img
+              = link_to image_tag(wine.photos.feature_photo(:normal), class: 'border-rd4', alt: wine.name), wine
+            .thumbnail-content-left
+              h2= link_to wine.name, wine
+              = simple_format wine.opinion
+          .box.border-radius-bottom
+            p
+              span.pull-left= t wine.wine_type, scope: 'activerecord.options.wine_types'
+              span.number-view.pull-right
+    .row
+      .span12
+        .pull-right
+          = will_paginate(@wines)

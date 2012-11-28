@@ -1,0 +1,16 @@
+zh_tw:
+  activerecord:
+    attributes:
+    options:
+      suggested_glasses:
+        bordeaux_red_wine: '波爾多紅酒杯'
+        burgundy_red_wine: '勃根地紅酒杯'
+        bordeaux_white_wine: '波爾多白酒杯'
+        burgundy_white_wine: '勃根地白酒杯'
+        sparkling_wine: "氣泡酒杯"
+        dessert_wine: "甜點酒杯"
+      wine_types:
+        red_wine: '紅酒'
+        white_wine: '白酒'
+        champagne: '香檳'
+        sparkling_wine: '氣泡酒'

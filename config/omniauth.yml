@@ -1,12 +1,12 @@
 development:
   facebook:
-    app_id: "273572676089462"
-    secret_key: "6029cb83251be4a8fffe6b02497f6513"
+    app_id: "477105525665881"
+    secret_key: "0ebbf8da39e54e5184537a2ff2fca828"
 test:
   facebook:
     app_id: "12341234"
     secret_key: "barbarbarbar"
 production:
   facebook:
-    app_id: "12341234"
-    secret_key: "barbarbarbar"
+    app_id: "477105525665881"
+    secret_key: "0ebbf8da39e54e5184537a2ff2fca828"
