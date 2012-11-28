@@ -1,0 +1,127 @@
+- set_meta_tags :title => @wine.name, :description => @wine.opinion || "#{@wine.user.username}在品味筆記上對#{@wine.name}的筆記"
+- set_meta_tags :open_graph => { title: @wine.name, type: 'itastetw:wine', url: "http://#{request.host+request.fullpath}", image: @wine.photos.feature_photo, app_id: OMNIAUTH_CONFIG['facebook']['app_id'] }
+
+#wine-page.row
+  .box-wrapper.span9
+    .row
+      .box-content-widget.span9
+        .row
+          .title.bg-title.span9
+            h1.show-title.pull-left= @wine.name
+            - if can? :update, @wine
+              .actions.pull-right
+                = link_to '編輯', edit_wine_path(@wine)
+                '
+                ' |
+                '
+                = link_to '刪除', wine_path(@wine), method: :delete, confirm: "確認要刪除#{@wine.name}嗎？他是一瓶好酒啊"
+        .widget
+          .widget-content
+            .row-fluid
+              .span7
+                = image_tag(@wine.photos.feature_photo(:large), class: 'border-rd4', id: 'feature-photo')
+              .span5.wine-info
+                ul.wine-info-list
+                  - if @wine.vintage
+                    li
+                      .overflow-hidden
+                        span.wine-property-label 年份
+                        span.wine-property= @wine.vintage
+                  - if @wine.producer
+                    li
+                      .overflow-hidden
+                        span.wine-property-label 酒莊
+                        span.wine-property= @wine.producer_name
+                  - if @wine.region
+                    li
+                      .overflow-hidden
+                        span.wine-producer-label 產地
+                        span.wine-property= @wine.region_name
+                  - if @wine.serving_temperature_from || @wine.serving_temperature_to
+                    li
+                      .overflow-hidden
+                        span.wine-producer-label 適飲溫度
+                        span.wine-property= @wine.serving_temperature_range
+                  - if @wine.suggested_glass
+                    li
+                      .overflow-hidden
+                        span.wine-producer-label 適用酒杯
+                        span.wine-property= t(@wine.suggested_glass, scope: 'activerecord.options.suggested_glasses')
+                  - if @wine.price
+                    li
+                      .overflow-hidden
+                        span.wine-producer-label 價格
+                        span.wine-property= @wine.price
+                  - if @wine.foods.count != 0
+                    li
+                      .overflow-hiddem
+                        span.wine-food-label 搭配食物
+                        span.wine-food-label-tags
+                          - @wine.foods.each do |food|
+                            span.label.label-info.food-tag= food.name
+                span.pull-right.user-rating #{@wine.rating}
+            .row-fluid
+              .span12
+                .wine-photos
+                  - @wine.photos.each do |photo|
+                    = image_tag(photo.image_url(:thumb), class: 'border-rd4 wine-photo', id: "wine-photo-#{photo.id}", data: { src: photo.image_url(:large) })
+        .widget
+          .widget-content
+            .tabbable
+              ul.nav.nav-tabs
+                - if @wine.appearance
+                  li= link_to "外觀", "#appearance", data: { toggle: 'tab' }
+                - if @wine.nose
+                  li= link_to "香氣", "#nose", data: { toggle: 'tab' }
+                - if @wine.taste
+                  li= link_to "口感", "#taste", data: { toggle: 'tab' }
+                - if @wine.opinion
+                  li= link_to "我的筆記", "#opinion", data: { toggle: 'tab' }
+              .tab-content
+                - if @wine.appearance
+                  .tab-pane#appearance
+                    = simple_format @wine.appearance
+                - if @wine.nose
+                  .tab-pane#nose
+                    = simple_format @wine.nose
+                - if @wine.taste
+                  .tab-pane#taste
+                    = simple_format @wine.taste
+                - if @wine.opinion
+                  .tab-pane#opinion
+                    = simple_format @wine.opinion
+        .widget
+          .widget-content
+            = render 'shared/facebook_comments'
+  .sidebar-content.span3
+    .row
+      .list-menu.box-wrapper.span3
+        = render 'shared/adsense'
+        /.row
+          /.title.bg-title.span3
+            /h3 推薦筆記
+        /ul.thumbnails.thumbnails-horizontal
+          /li.span3
+            /.thumbnail.border-radius-top
+              /.bg-thumbnail-img
+                /= image_tag("http://placehold.it/200x200", class: 'border-radius-top')
+              /h5 some other wine
+            /.box.border-radius-bottom
+              /p
+                /span.title_torrent.pull-left Wine
+          /li.span3
+            /.thumbnail.border-radius-top
+              /.bg-thumbnail-img
+                /= image_tag("http://placehold.it/200x160", class: 'border-radius-top')
+              /h5 some other wine
+            /.box.border-radius-bottom
+              /p
+                /span.title_torrent.pull-left Wine
+          /li.span3
+            /.thumbnail.border-radius-top
+              /.bg-thumbnail-img
+                /= image_tag("http://placehold.it/200x160", class: 'border-radius-top')
+              /h5 some other wine
+            /.box.border-radius-bottom
+              /p
+                /span.title_torrent.pull-left Wine

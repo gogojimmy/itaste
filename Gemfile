@@ -13,9 +13,17 @@ gem 'simple_form'
 gem 'omniauth-facebook'
 gem 'exception_notification'
 gem 'awesome_print'
-gem 'pry'
-gem 'pry-remote'
-gem 'pry-nav'
+gem 'rmagick'
+gem 'carrierwave'
+gem 'carrierwave_backgrounder'
+gem 'fog'
+gem 'cells'
+gem 'delayed_job_active_record'
+gem 'daemons'
+gem "delayed_job_admin"
+gem 'koala'
+gem 'meta-tags', :require => 'meta_tags'
+gem 'cancan'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -26,6 +34,9 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
   gem 'compass-rails'
   gem 'font-awesome-rails'
+  gem 'jquery-ui-rails'
+  gem 'jquery-tokeninput-rails'
+  gem 'jquery-fileupload-rails'
 end
 
 gem 'jquery-rails'

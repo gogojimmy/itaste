@@ -12,6 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
+//= require jquery.ui.all
 //= require bootstrap
 //= require theme
+//= require jquery.tokeninput
+//= require jquery-fileupload/basic
+//= require jquery-fileupload/vendor/tmpl
+//= require_tree .

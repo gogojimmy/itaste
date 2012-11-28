@@ -1,0 +1,7 @@
+.box-wrapper.span12
+  .row
+    .title.span12
+      h2.pull-left= @vertical_collection_title
+  ul.thumbnails.thumbnails-horizontal
+    - @collection.each do |cell|
+      = render_cell :wine, :vertical_wine_component, cell

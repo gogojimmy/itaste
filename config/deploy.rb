@@ -4,6 +4,7 @@ require 'capistrano_colors'
 require "delayed/recipes"
 #$:.unshift(File.expand_path('./lib', ENV['rvm_path']))
 require "rvm/capistrano"
+load 'deploy/assets'
 
 set :rvm_ruby_string, 'ruby-1.9.3-p125'
 

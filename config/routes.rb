@@ -1,5 +1,5 @@
 Itaste::Application.routes.draw do
-  root :to => "welcome#index"
+  root :to => "wines#index"
   devise_for :users, path_names: {sign_in: "login", sign_out: "logout"}, :skip => [:sessions], controllers: {omniauth_callbacks: "omniauth_callbacks"}
   devise_scope :user do
     get 'signin' => 'devise/sessions#new', :as => :new_user_session
@@ -8,7 +8,25 @@ Itaste::Application.routes.draw do
   end
   match 'signout', to: 'sessions#destroy', as: 'signout'
 
-  resources :users, only: [:show]
+  resources :users do
+    get '/notes', to: "wines#notes"
+    resources :lists, only: [:index, :show]
+  end
+  resources :wines do
+    collection do
+      get :create_wine, as: :create_wine
+    end
+  end
+  resources :producers, only: [:index, :show]
+  resources :foods, only: [:index]
+  resources :regions, only: [:index]
+  resources :grapes, only: [:index]
+  resources :places, only: [:index]
+  resources :photos do
+    put :set_feature
+  end
+
+  resources :lists
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
