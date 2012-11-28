@@ -22,7 +22,6 @@ html lang="zh"
                       a.close data-dismiss="alert" &times;
                       = simple_format(msg)
         = yield
-    hr
     = render 'shared/footer'
     = javascript_include_tag "application"
     = render 'shared/google_analytics' if Rails.env.production?

@@ -76,5 +76,3 @@ jQuery ->
   $("#list-area, #choosable-wines").sortable(
     connectWith: ".sortable"
   ).disableSelection()
-
-  $("#list-area").sortable receive: alert 'yo'

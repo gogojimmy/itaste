@@ -2,9 +2,9 @@
 - set_meta_tags :open_graph => { title: "#{@user.username}的筆記", type: 'Website', url: "http://#{request.host+request.fullpath}", image: "http://#{request.host}/assets/fallback/normal_default.png" }
 
 .row
-  .box-wrapper.span9
+  .box-wrapper.span12
     .row
-      .title.span9
+      .title.span12
         h1.pull-left #{@user.username}的品味筆記
     ul.thumbnails.thumbnails-horizontal
       - @wines.each do |wine|
@@ -31,13 +31,13 @@
       .span12
         .pull-right
           = will_paginate(@wines)
-  .span3
-    .widget
-      .widget-content
-        h3.title #{@user.username}的酒單
-        - if @user == current_user
-          = link_to "新增酒單", new_list_path, class: 'btn btn-primary span2'
-        .clearfix
-        ul.wine-list
-          - @lists.each do |list|
-            = link_to "#{list.name}(#{list.size})支酒", list
+  /.span3
+    /.widget
+      /.widget-content
+        /h3.title #{@user.username}的酒單
+        /- if @user == current_user
+          /= link_to "新增酒單", new_list_path, class: 'btn btn-primary span2'
+        /.clearfix
+        /ul.wine-list
+          /- @lists.each do |list|
+            /= link_to "#{list.name}(#{list.size})支酒", list
