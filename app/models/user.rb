@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me, :username, :avatar, :avatar_cache, :remove_avatar, :facebook_token, :facebook_expires_at
   # attr_accessible :title, :body
   has_many :wines
-
+  has_many :lists
 
   def has_permission?(subject)
     subject.try(:user).try(:id) == self.id

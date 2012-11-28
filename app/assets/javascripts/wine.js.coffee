@@ -58,10 +58,23 @@ jQuery ->
       console.log("Upload failed:")
       console.log(data.result)
 
-    $(".rating > span").click ->
-      $(this).nextAll().andSelf().each ->
-        $(this).addClass 'stared'
+  $(".rating > span").click ->
+    $(this).nextAll().andSelf().each ->
+      $(this).addClass 'stared'
 
-    $("span.stared").click ->
-      $(this).nextAll().andSelf().each ->
-        $(this).removeClass 'stared'
+  $("span.stared").click ->
+    $(this).nextAll().andSelf().each ->
+      $(this).removeClass 'stared'
+
+  $("img.wine-photo").click ->
+    $("#feature-photo").attr('src', $(this).data('src'))
+
+  $("img.wine-photo").hover ->
+    $(".hover-border").removeClass 'hover-border'
+    $(this).addClass 'hover-border'
+
+  $("#list-area, #choosable-wines").sortable(
+    connectWith: ".sortable"
+  ).disableSelection()
+
+  $("#list-area").sortable receive: alert 'yo'

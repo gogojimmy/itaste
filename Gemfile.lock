@@ -33,6 +33,7 @@ GEM
     bcrypt-ruby (3.0.1)
     bootstrap-sass (2.0.4.0)
     builder (3.0.0)
+    cancan (1.6.8)
     capistrano (2.12.0)
       highline
       net-scp (>= 1.0.0)
@@ -220,6 +221,7 @@ PLATFORMS
 DEPENDENCIES
   awesome_print
   bootstrap-sass (~> 2.0.4.0)
+  cancan
   capistrano
   capistrano-ext
   capistrano_colors

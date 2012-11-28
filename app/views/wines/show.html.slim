@@ -8,17 +8,18 @@
         .row
           .title.bg-title.span9
             h1.show-title.pull-left= @wine.name
-            .actions.pull-right
-              = link_to '編輯', edit_wine_path(@wine) if current_user && current_user.has_permission?(@wine)
-              '
-              ' |
-              '
-              = link_to '刪除', wine_path(@wine), method: :delete, confirm: "確認要刪除#{@wine.name}嗎？他是一瓶好酒啊" if current_user && current_user.has_permission?(@wine)
+            - if can? :update, @wine
+              .actions.pull-right
+                = link_to '編輯', edit_wine_path(@wine)
+                '
+                ' |
+                '
+                = link_to '刪除', wine_path(@wine), method: :delete, confirm: "確認要刪除#{@wine.name}嗎？他是一瓶好酒啊"
         .widget
           .widget-content
             .row-fluid
               .span7
-                = image_tag(@wine.photos.feature_photo(:large), class: 'border-rd4')
+                = image_tag(@wine.photos.feature_photo(:large), class: 'border-rd4', id: 'feature-photo')
               .span5.wine-info
                 ul.wine-info-list
                   - if @wine.vintage
@@ -63,7 +64,7 @@
               .span12
                 .wine-photos
                   - @wine.photos.each do |photo|
-                    = image_tag(photo.image_url(:thumb), class: 'border-rd4')
+                    = image_tag(photo.image_url(:thumb), class: 'border-rd4 wine-photo', id: "wine-photo-#{photo.id}", data: { src: photo.image_url(:large) })
         .widget
           .widget-content
             .tabbable

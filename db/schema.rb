@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121121174026) do
+ActiveRecord::Schema.define(:version => 20121123104650) do
 
   create_table "badges", :force => true do |t|
     t.string   "name"
@@ -62,6 +62,16 @@ ActiveRecord::Schema.define(:version => 20121121174026) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "lists", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "lists", ["user_id"], :name => "index_lists_on_user_id"
 
   create_table "photos", :force => true do |t|
     t.string   "name"
@@ -172,6 +182,16 @@ ActiveRecord::Schema.define(:version => 20121121174026) do
 
   add_index "wine_grape_ships", ["grape_id"], :name => "index_wine_grape_ships_on_grape_id"
   add_index "wine_grape_ships", ["wine_id"], :name => "index_wine_grape_ships_on_wine_id"
+
+  create_table "wine_list_ships", :force => true do |t|
+    t.integer  "wine_id"
+    t.integer  "list_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "wine_list_ships", ["list_id"], :name => "index_wine_list_ships_on_list_id"
+  add_index "wine_list_ships", ["wine_id"], :name => "index_wine_list_ships_on_wine_id"
 
   create_table "wines", :force => true do |t|
     t.string   "name"

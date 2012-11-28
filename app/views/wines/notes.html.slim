@@ -2,10 +2,10 @@
 - set_meta_tags :open_graph => { title: "#{@user.username}的筆記", type: 'Website', url: "http://#{request.host+request.fullpath}", image: "http://#{request.host}/assets/fallback/normal_default.png" }
 
 .row
-  .box-wrapper.span12
+  .box-wrapper.span9
     .row
-      .title.span12
-        h1.pull-left 我的筆記
+      .title.span9
+        h1.pull-left #{@user.username}的品味筆記
     ul.thumbnails.thumbnails-horizontal
       - @wines.each do |wine|
         li.span3
@@ -21,12 +21,23 @@
             p
               span.pull-left= t wine.wine_type, scope: 'activerecord.options.wine_types'
               span.number-view.pull-right
-      li.span3
-          .thumbnail.border-radius-top
-            .bg-thumbnail-img
-              = link_to image_tag(asset_path('fallback/normal_default.png')), create_wine_wines_path
-            h5= link_to '新增一則筆記', create_wine_wines_path
+      - if @user == current_user
+        li.span3
+            .thumbnail.border-radius-top
+              .bg-thumbnail-img
+                = link_to image_tag(asset_path('fallback/normal_default.png')), create_wine_wines_path
+              h5= link_to '新增一則筆記', create_wine_wines_path
     .row
       .span12
         .pull-right
           = will_paginate(@wines)
+  .span3
+    .widget
+      .widget-content
+        h3.title #{@user.username}的酒單
+        - if @user == current_user
+          = link_to "新增酒單", new_list_path, class: 'btn btn-primary span2'
+        .clearfix
+        ul.wine-list
+          - @lists.each do |list|
+            = link_to "#{list.name}(#{list.size})支酒", list

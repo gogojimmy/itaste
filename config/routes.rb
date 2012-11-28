@@ -10,6 +10,7 @@ Itaste::Application.routes.draw do
 
   resources :users do
     get '/notes', to: "wines#notes"
+    resources :lists, only: [:index, :show]
   end
   resources :wines do
     collection do
@@ -24,6 +25,8 @@ Itaste::Application.routes.draw do
   resources :photos do
     put :set_feature
   end
+
+  resources :lists
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

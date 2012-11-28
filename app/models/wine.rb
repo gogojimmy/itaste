@@ -17,6 +17,8 @@ class Wine < ActiveRecord::Base
   has_many :wine_food_ship
   has_many :foods, through: :wine_food_ship
   has_many :photos
+  has_many :wine_list_ship
+  has_many :lists, through: :wine_list_ship
 
   validates_presence_of :name
   validates_presence_of :wine_type

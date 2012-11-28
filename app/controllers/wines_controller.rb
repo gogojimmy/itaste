@@ -1,16 +1,17 @@
 #encoding: utf-8
 class WinesController < ApplicationController
   before_filter :authenticate_user!, except: [:index, :show]
+  load_and_authorize_resource except: [:notes, :create_wine]
 
   def show
-    @wine = Wine.find(params[:id])
+    #@wine = Wine.find(params[:id])
   end
 
   def index
     if params[:format] == 'json'
-      @wines = Wine.completed.order(:name).where("name like ?", "%#{params[:term]}%")
+      @wines = @wines.completed.order(:name).where("name like ?", "%#{params[:term]}%")
     else
-      @wines = Wine.completed.paginate(page: params[:page])
+      @wines = @wines.completed.paginate(page: params[:page])
     end
     respond_to do |format|
       format.html
@@ -21,25 +22,13 @@ class WinesController < ApplicationController
   def notes
     @user = User.find(params[:user_id])
     @wines = @user.wines.completed.paginate(page: params[:page], per_page: 20)
+    @lists = @user.lists
   end
 
   def create_wine
     @wine = Wine.find_uncomplete_or_create_without_validation(current_user)
     redirect_to edit_wine_path(@wine)
   end
-
-  #def new
-    #@wine = current_user.wines.build
-  #end
-
-  #def create
-    #@wine = current_user.wines.build(params[:wine])
-    #if @wine.save
-      #redirect_to @wine, notice: "成功建立一則筆記"
-    #else
-      #render :new
-    #end
-  #end
 
   def edit
     @wine = Wine.find(params[:id])
