@@ -73,7 +73,7 @@ class Wine < ActiveRecord::Base
 
   def complete_and_post_to_fb
     if self.complete_changed?
-      #self.user.post_to_facebook(wine_url(self))
+      self.user.post_to_facebook(wine_url(self))
     end
   end
 
