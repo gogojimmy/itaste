@@ -117,7 +117,6 @@ namespace :mysql do
   end
 end
 
-before "deploy:assets:precompile", "deploy:custom_setup"
 before 'deploy:setup', 'rvm:install_rvm'
 after 'rvm:install_rvm', 'rvm:install_ruby'
 after "deploy", "deploy:cleanup"
