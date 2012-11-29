@@ -95,6 +95,7 @@ end
 
 before "deploy:assets:precompile", "deploy:custom_setup"
 before 'deploy:setup', 'rvm:install_rvm'
+after 'rvm:install_rvm', 'rvm:install_ruby'
 after "deploy", "deploy:cleanup"
 after "deploy:migrations", "deploy:cleanup"
 after "deploy:migrations", "deploy:generate_yard"
