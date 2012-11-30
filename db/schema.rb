@@ -201,8 +201,8 @@ ActiveRecord::Schema.define(:version => 20121123104650) do
     t.decimal  "alcohol",                  :precision => 6, :scale => 5
     t.integer  "producer_id"
     t.integer  "region_id"
-    t.integer  "serving_temperature_from"
-    t.integer  "serving_temperature_to"
+    t.integer  "serving_temperature_from",                               :default => 15
+    t.integer  "serving_temperature_to",                                 :default => 18
     t.string   "suggested_glass"
     t.float    "price"
     t.datetime "when"
@@ -211,7 +211,7 @@ ActiveRecord::Schema.define(:version => 20121123104650) do
     t.text     "nose"
     t.text     "taste"
     t.text     "opinion"
-    t.integer  "rating",                                                 :default => 3
+    t.integer  "rating",                                                 :default => 95
     t.boolean  "complete",                                               :default => false
     t.datetime "created_at",                                                                :null => false
     t.datetime "updated_at",                                                                :null => false

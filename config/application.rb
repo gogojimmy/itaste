@@ -69,5 +69,10 @@ module Itaste
 
     # Slim
     Slim::Engine.set_default_options :pretty => true
+
+    $EMAIL_CONFIG = ActiveSupport::HashWithIndifferentAccess.new YAML.load(File.open("#{Rails.root}/config/email.yml"))[Rails.env]
+
+    config.action_mailer.default_url_options = { :host => $EMAIL_CONFIG[:host] }
+
   end
 end

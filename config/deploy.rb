@@ -121,10 +121,7 @@ before 'deploy:setup', 'rvm:install_rvm'
 after 'rvm:install_rvm', 'rvm:install_ruby'
 after "deploy", "deploy:cleanup"
 after "deploy:migrations", "deploy:cleanup"
-after "deploy:migrations", "deploy:generate_yard"
 after "mysql:sync", "mysql:backup", "mysql:import"
 after "deploy:stop",    "delayed_job:stop"
 after "deploy:start",   "delayed_job:start"
 after "deploy:restart", "delayed_job:restart"
-after "deploy:update_code", "deploy:copy_old_sitemap"
-after "deploy", "refresh_sitemaps"
