@@ -74,7 +74,7 @@ module Itaste
 
     config.action_mailer.default_url_options = { :host => $EMAIL_CONFIG[:host] }
 
-    config.action_mailer.smtp_settings = $EMAIL_CONFIG
+    config.action_mailer.smtp_settings = $EMAIL_CONFIG[:smtp].symbolize_keys if !$EMAIL_CONFIG[:smtp].nil?
 
   end
 end
