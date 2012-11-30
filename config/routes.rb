@@ -1,4 +1,5 @@
 Itaste::Application.routes.draw do
+  default_url_options host: $EMAIL_CONFIG[:host]
   root :to => "wines#index"
   devise_for :users, path_names: {sign_in: "login", sign_out: "logout"}, :skip => [:sessions], controllers: {omniauth_callbacks: "omniauth_callbacks"}
   devise_scope :user do
