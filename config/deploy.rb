@@ -30,7 +30,7 @@ namespace :deploy do
   end
 
   task :custom_setup, :roles => [:app] do
-    run "cp #{shared_path}/config/*.yml #{release_path}/config/"
+    run "cp -fR #{shared_path}/config/*.yml #{release_path}/config/"
   end
 
   task :setup_config, roles: :app do
@@ -43,7 +43,7 @@ namespace :deploy do
   after "deploy:setup", "deploy:setup_config"
 
   task :symlink_config, roles: :app do
-    run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
+    run "ln -nfs #{shared_path}/config/* #{release_path}/config/"
   end
   after "deploy:finalize_update", "deploy:symlink_config"
 
@@ -65,20 +65,20 @@ namespace :deploy do
     run "cd #{current_path}; rake db:reset RAILS_ENV=#{rails_env}"
   end
 
-  #namespace :assets do
-    #task :precompile, :roles => :web, :except => { :no_release => true } do
-      #from = source.next_revision(current_revision)
-      #if capture("cd #{latest_release} && #{source.local.log(from)} vendor/assets/ app/assets/ | wc -l").to_i > 0
-        #run_locally "bundle exec rake assets:precompile"
-        #find_servers_for_task(current_task).each do |server|
-          #run_locally "rsync -vr --exclude='.DS_Store' public/assets #{user}@#{server.host}:#{shared_path}/"
-        #end
-        #run_locally "rm -rf public/assets/*"
-      #else
-        #logger.info "Skipping asset pre-compilation because there were no asset changes"
-      #end
-    #end
-  #end
+  namespace :assets do
+    task :precompile, :roles => :web, :except => { :no_release => true } do
+      from = source.next_revision(current_revision)
+      if capture("cd #{latest_release} && #{source.local.log(from)} vendor/assets/ app/assets/ | wc -l").to_i > 0
+        run_locally "bundle exec rake assets:precompile"
+        find_servers_for_task(current_task).each do |server|
+          run_locally "rsync -vr --exclude='.DS_Store' public/assets #{user}@#{server.host}:#{shared_path}/"
+        end
+        run_locally "rm -rf public/assets/*"
+      else
+        logger.info "Skipping asset pre-compilation because there were no asset changes"
+      end
+    end
+  end
 end
 
 task :tail_log, :roles => :app do

@@ -74,5 +74,7 @@ module Itaste
 
     config.action_mailer.default_url_options = { :host => $EMAIL_CONFIG[:host] }
 
+    config.action_mailer.smtp_settings = $EMAIL_CONFIG
+
   end
 end
