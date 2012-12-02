@@ -19,4 +19,12 @@ module WinesHelper
     end
   end
 
+  def feature_photo(wine)
+    if wine.photos.feature_photo == "fallback/normal_default.png"
+      "http://#{request.host+request.fullpath+@wine.photos.feature_photo}"
+    else
+      wine.photos.feature_photo
+    end
+  end
+
 end

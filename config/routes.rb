@@ -1,5 +1,5 @@
 Itaste::Application.routes.draw do
-  default_url_options host: $EMAIL_CONFIG[:host]
+  default_url_options host: '3s69.localtunnel.com'
   root :to => "wines#index"
   devise_for :users, path_names: {sign_in: "login", sign_out: "logout"}, :skip => [:sessions], controllers: {omniauth_callbacks: "omniauth_callbacks"}
   devise_scope :user do
@@ -13,9 +13,11 @@ Itaste::Application.routes.draw do
     get '/notes', to: "wines#notes"
     resources :lists, only: [:index, :show]
   end
+
   resources :wines do
     collection do
       get :create_wine, as: :create_wine
+      get :facebook_places
     end
   end
   resources :producers, only: [:index, :show]

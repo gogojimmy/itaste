@@ -27,8 +27,8 @@ class User < ActiveRecord::Base
     nil # or consider a custom null object
   end
 
-  def post_to_facebook(url)
-    facebook.put_connections("me", "itastetw:taste", wine: url)
+  def post_to_facebook(url, place_id=nil)
+    facebook.put_connections("me", "itastetw:taste", wine: url, place: place_id)
   end
 
   def self.from_omniauth(auth)

@@ -6,7 +6,7 @@
           h3.title 上傳圖片
           ul.thumbnails
             li
-              = link_to(image_tag(asset_path('photo-placeholder.jpg'), class: 'border-rd4', id: 'upload-photo-placeholder'), "#upload-modal", id: 'upload-photo-link', data: { toggle: 'modal'})
+              = link_to(image_tag(asset_path('photo-placeholder.jpg'), id: 'upload-photo-placeholder'), "#upload-modal", id: 'upload-photo-link', data: { toggle: 'modal'})
   .row
     ul#photos
       .widget

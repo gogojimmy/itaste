@@ -1,10 +1,10 @@
 #encoding: utf-8
 class WinesController < ApplicationController
-  before_filter :authenticate_user!, except: [:index, :show]
-  load_and_authorize_resource except: [:notes, :create_wine]
+  before_filter :authenticate_user!, except: [:index, :show, :notes]
+  load_and_authorize_resource except: [:notes, :create_wine, :facebook_places]
 
   def show
-    #@wine = Wine.find(params[:id])
+    @wine = Wine.find(params[:id])
   end
 
   def index
@@ -32,6 +32,7 @@ class WinesController < ApplicationController
 
   def edit
     @wine = Wine.find(params[:id])
+    @wine.place ||= @wine.build_place
     redirect_to @wine, notice: '你沒有權限編輯這個項目' unless current_user.has_permission?(@wine)
   end
 
@@ -39,10 +40,19 @@ class WinesController < ApplicationController
     @wine = Wine.find(params[:id])
     redirect_to @wine, notice: '你沒有權限編輯這個項目' unless current_user.has_permission?(@wine)
 
-    if @wine.update_attributes(params[:wine])
-      redirect_to @wine, notice: "成功更新了#{@wine.name}"
+    if @wine.complete?
+      if @wine.update_attributes(params[:wine])
+        redirect_to @wine, notice: "成功更新了#{@wine.name}"
+      else
+        render :edit
+      end
     else
-      render :edit
+      if @wine.update_attributes(params[:wine])
+        current_user.delay.post_to_facebook(wine_url(@wine), @wine.place_facebook_id)
+        redirect_to @wine, notice: "成功建立了#{@wine.name}"
+      else
+        render :edit
+      end
     end
   end
 
@@ -54,4 +64,5 @@ class WinesController < ApplicationController
     @wine.destroy
     redirect_to user_notes_path(current_user), notice: "成功刪除了#{name}"
   end
+
 end

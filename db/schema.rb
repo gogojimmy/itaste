@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121123104650) do
+ActiveRecord::Schema.define(:version => 20121201214456) do
 
   create_table "badges", :force => true do |t|
     t.string   "name"
@@ -89,12 +89,14 @@ ActiveRecord::Schema.define(:version => 20121123104650) do
 
   create_table "places", :force => true do |t|
     t.string   "name"
-    t.decimal  "lat",        :precision => 15, :scale => 10
-    t.decimal  "lon",        :precision => 15, :scale => 10
-    t.datetime "created_at",                                 :null => false
-    t.datetime "updated_at",                                 :null => false
+    t.decimal  "lat",         :precision => 15, :scale => 10
+    t.decimal  "lon",         :precision => 15, :scale => 10
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
+    t.integer  "facebook_id"
   end
 
+  add_index "places", ["facebook_id"], :name => "index_places_on_facebook_id"
   add_index "places", ["lat"], :name => "index_places_on_lat"
   add_index "places", ["lon"], :name => "index_places_on_lon"
 
@@ -201,8 +203,8 @@ ActiveRecord::Schema.define(:version => 20121123104650) do
     t.decimal  "alcohol",                  :precision => 6, :scale => 5
     t.integer  "producer_id"
     t.integer  "region_id"
-    t.integer  "serving_temperature_from",                               :default => 15
-    t.integer  "serving_temperature_to",                                 :default => 18
+    t.integer  "serving_temperature_from"
+    t.integer  "serving_temperature_to"
     t.string   "suggested_glass"
     t.float    "price"
     t.datetime "when"
@@ -211,7 +213,7 @@ ActiveRecord::Schema.define(:version => 20121123104650) do
     t.text     "nose"
     t.text     "taste"
     t.text     "opinion"
-    t.integer  "rating",                                                 :default => 95
+    t.integer  "rating",                                                 :default => 3
     t.boolean  "complete",                                               :default => false
     t.datetime "created_at",                                                                :null => false
     t.datetime "updated_at",                                                                :null => false

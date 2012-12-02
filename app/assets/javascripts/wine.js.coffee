@@ -1,9 +1,48 @@
 jQuery ->
+
+  FixImages(false)
+
   $(".date-picker").datepicker
     dateFormat: 'yy-mm-dd'
 
-  $(".producer-picker, .wine-name-picker, .region-picker, .place-picker").autocomplete
-    source: $(this).data('autocomplete-source')
+  $(".wine-name-picker").autocomplete
+    source: $(".wine-name-picker").data('autocomplete-source')
+
+  $(".producer-picker").autocomplete
+    source: $(".producer-picker").data('autocomplete-source')
+
+  $(".region-picker").autocomplete
+    source: $(".region-picker").data('autocomplete-source')
+
+  cache = {}
+  obj = $(".place-picker").autocomplete(
+    source: (request, response) ->
+      term = request.term
+      if term of cache
+        response cache[term]
+        return
+      $.ajax
+        url: $(".place-picker").data('autocomplete-source') + term
+        dataType: "jsonp"
+        success: (results) ->
+          response $.map(results.data, (item) ->
+            label: item.name
+            value: item.name
+            city: item.location.city
+            street: item.location.street
+            latitude: item.location.latitude
+            longitude: item.location.longitude
+            country: item.location.country
+            id: item.id
+          )
+    select: (event, ui) ->
+      $("#wine_place_attributes_lat").val(ui.item.latitude)
+      $("#wine_place_attributes_lon").val(ui.item.longitude)
+      $("#wine_place_attributes_facebook_id").val(ui.item.id)
+  ).data("autocomplete")
+
+  obj && obj._renderItem = (ul, item) ->
+    $("<li>").data("item.autocomplete", item).append("<a>" + item.label + "<br>" + "<span class='location'>" + item.city + "  " + item.street + "</span></a>").appendTo ul
 
   $("#serving_temperature_range").text ($("#serving_temperature_from").val | 15) + "度 - " + ($("#serving_temperature_to").val | 17) + "度"
 
@@ -67,7 +106,10 @@ jQuery ->
       $(this).removeClass 'stared'
 
   $("img.wine-photo").click ->
-    $("#feature-photo").attr('src', $(this).data('src'))
+    obj = $(this)
+    $("#feature-photo").fadeOut(500, ->
+      $("#feature-photo").attr('src', obj.data('src'))
+    ).fadeIn(500)
 
   $("img.wine-photo").hover ->
     $(".hover-border").removeClass 'hover-border'

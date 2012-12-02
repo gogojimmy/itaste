@@ -10,8 +10,8 @@
         li.wine.span6
           .thumbnail.border-radius-top
             .avatar
-              = avatar_image(wine.user, :thumb, 'wine-avatar pull-left')
-              span #{wine.user.username}
+              = link_to avatar_image(wine.user, :thumb, 'wine-avatar pull-left'), user_notes_path(wine.user)
+              span #{link_to wine.user.username, user_notes_path(wine.user)}
               span.pull-right= l (wine.when || wine.updated_at), format: :mini
               .clearfix
             .bg-thumbnail-img

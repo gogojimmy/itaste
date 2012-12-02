@@ -1,28 +1,5 @@
 @import url(http://fonts.googleapis.com/css?family=Unica+One);
 
-ul.ui-autocomplete {
-  position: absolute;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  border: solid 1px #999;
-  cursor: default;
-  li {
-    background-color: #FFF;
-    border-top: solid 1px #DDD;
-    margin: 0;
-    padding: 0;
-    a {
-      color: #000;
-      display: block;
-      padding: 3px;
-    }
-    a.ui-state-hover, a.ui-state-active {
-      background-color: #FFFCB2;
-    }
-  }
-}
-
 #serving-temperature-range-ui {
   margin-left: 0;
   margin-top: 7px;
@@ -40,12 +17,12 @@ ul.wine-info-list {
     border-bottom: 1px solid #CDCDCD;
     position: relative;
     line-height: 2em;
-    span.wine-property-label, span.wine-food-label {
+    span.wine-property-label, span.wine-food-label, span.wine-place-label {
       text-align: left;
       float: left;
       display: block;
     }
-    span.wine-property {
+    span.wine-property, span.wine-place {
       text-align: right;
       float: right;
     }
@@ -85,7 +62,6 @@ h1.show-title { padding-left: 10px; }
       li {
         margin-bottom: 18px;
         margin-left: 20px;
-        height: 140px;
         margin: 0 4% 25px 0;
         float: left;
         padding: 8px;
@@ -205,4 +181,14 @@ h1.show-title { padding-left: 10px; }
 
 #list-area, #choosable-wines {
   height: 220px;
+}
+
+.bg-thumbnail-img {
+  overflow: hidden;
+}
+
+img#upload-photo-placeholder {
+  height: 150px;
+  width: 200px;
+  border-radius: 4px;
 }

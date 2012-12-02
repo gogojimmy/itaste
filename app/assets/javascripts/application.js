@@ -18,4 +18,6 @@
 //= require jquery.tokeninput
 //= require jquery-fileupload/basic
 //= require jquery-fileupload/vendor/tmpl
-//= require_tree .
+//= require underscore
+//= require image_fuctions
+//= require wine

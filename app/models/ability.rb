@@ -12,6 +12,9 @@ class Ability
       can :update, Wine do |wine|
         wine.try(:user) == user
       end
+      can :destroy, Wine do |wine|
+        wine.try(:user) == user
+      end
       can :create, Food
       can :create, Grape
       can :create, List

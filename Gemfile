@@ -37,6 +37,7 @@ group :assets do
   gem 'jquery-ui-rails'
   gem 'jquery-tokeninput-rails'
   gem 'jquery-fileupload-rails'
+  gem 'underscore-rails'
 end
 
 gem 'jquery-rails'

@@ -1,10 +1,8 @@
 #encoding: utf-8
 class Wine < ActiveRecord::Base
-  attr_accessible :alcohol, :appearance, :name, :nose, :price, :producer_id, :serving_temperature_from, :serving_temperature_to, :suggested_glass, :taste, :vintage, :when, :wine_type, :user_id, :place_id, :opinion, :producer_name, :food_ids, :food_tokens, :grape_tokens, :rating, :region_name, :region_id, :complete, :place_name
+  attr_accessible :alcohol, :appearance, :name, :nose, :price, :producer_id, :serving_temperature_from, :serving_temperature_to, :suggested_glass, :taste, :vintage, :when, :wine_type, :user_id, :place_id, :opinion, :producer_name, :food_ids, :food_tokens, :grape_tokens, :rating, :region_name, :region_id, :complete, :place_name, :place_attributes
   attr_reader :food_tokens, :grape_tokens
   include ActiveModel::Dirty
-
-  include Rails.application.routes.url_helpers
 
   belongs_to :user
   belongs_to :producer
@@ -19,20 +17,30 @@ class Wine < ActiveRecord::Base
   has_many :photos
   has_many :wine_list_ship
   has_many :lists, through: :wine_list_ship
+  accepts_nested_attributes_for :place
 
   validates_presence_of :name
   validates_presence_of :wine_type
   validates_inclusion_of :rating, in: 1..100
-  after_save :complete_and_post_to_fb
 
   scope :uncomplete, where(complete: false)
   scope :completed, where(complete: true)
+
+  before_update :find_or_create_place
+
+  delegate :facebook_id, to: :place, allow_nil: true, prefix: true
 
   WINE_TYPE = %w{ red_wine white_wine champagne sparkling_wine }
   GLASS_TYPE = %w{ bordeaux_red_wine burgundy_red_wine bordeaux_white_wine burgundy_white_wine sparkling_wine dessert_wine }
 
   def self.find_uncomplete_or_create_without_validation(user)
     wine = user.wines.uncomplete.first || self.create_without_validation(user)
+  end
+
+  def other_wines(count=4)
+    ids = self.user.wines.map(&:id)
+    ids.delete self.id
+    Wine.find(ids).sample(count)
   end
 
   def serving_temperature_range
@@ -71,18 +79,20 @@ class Wine < ActiveRecord::Base
     self.grape_ids = Grape.ids_from_tokens(tokens)
   end
 
-  def complete_and_post_to_fb
-    if self.complete_changed?
-      self.user.post_to_facebook(wine_url(self))
-    end
-  end
-
   private
 
   def self.create_without_validation(user)
     wine = user.wines.build
     wine.save(validate: false)
     wine
+  end
+
+  def find_or_create_place
+    self.place = Place.where(facebook_id: self.place.facebook_id).first_or_create do |p|
+      p.name = self.place.name
+      p.lat = self.place.lat
+      p.lon = self.place.lon
+    end
   end
 
 end

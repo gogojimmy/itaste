@@ -22,28 +22,28 @@ class ImageUploader < CarrierWave::Uploader::Base
   version :thumb do
     process :fix_exif_rotation
     process :strip
-    process :resize_to_fill => [120, 120]
+    process :resize_to_limit => [120, 0]
     process :quality => 100
   end
 
   version :normal do
     process :fix_exif_rotation
     process :strip
-    process :resize_to_fill => [200, 200]
+    process :resize_to_limit => [200, 0]
     process :quality => 100
   end
 
   version :large do
     process :fix_exif_rotation
     process :strip
-    process :resize_to_fill => [390, 390]
+    process :resize_to_limit => [390, 0]
     process :quality => 100
   end
 
   version :xlarge do
     process :fix_exif_rotation
     process :strip
-    process :resize_to_fill => [612, 612]
+    process :resize_to_limit => [612, 0]
     process :quality => 100
   end
 end

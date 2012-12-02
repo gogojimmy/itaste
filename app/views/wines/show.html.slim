@@ -1,5 +1,5 @@
 - set_meta_tags :title => @wine.name, :description => @wine.opinion || "#{@wine.user.username}在品味筆記上對#{@wine.name}的筆記"
-- set_meta_tags :open_graph => { title: @wine.name, type: 'itastetw:wine', url: "http://#{request.host+request.fullpath}", image: @wine.photos.feature_photo, app_id: OMNIAUTH_CONFIG['facebook']['app_id'] }
+- set_meta_tags :open_graph => { title: @wine.name, type: 'itastetw:wine', url: "http://#{request.host+request.fullpath}", image: feature_photo(@wine), message: @wine.opinion, place: @wine.place_facebook_id }
 
 #wine-page.row
   .box-wrapper.span9
@@ -59,6 +59,11 @@
                         span.wine-food-label-tags
                           - @wine.foods.each do |food|
                             span.label.label-info.food-tag= food.name
+                  - if @wine.place
+                    li
+                      .overflow-hiddem
+                        span.wine-place-label 品味地點
+                        span.wine-place= @wine.place_name
                 span.pull-right.user-rating #{@wine.rating}
             .row-fluid
               .span12
@@ -96,32 +101,16 @@
   .sidebar-content.span3
     .row
       .list-menu.box-wrapper.span3
-        = render 'shared/adsense'
-        /.row
-          /.title.bg-title.span3
-            /h3 推薦筆記
-        /ul.thumbnails.thumbnails-horizontal
-          /li.span3
-            /.thumbnail.border-radius-top
-              /.bg-thumbnail-img
-                /= image_tag("http://placehold.it/200x200", class: 'border-radius-top')
-              /h5 some other wine
-            /.box.border-radius-bottom
-              /p
-                /span.title_torrent.pull-left Wine
-          /li.span3
-            /.thumbnail.border-radius-top
-              /.bg-thumbnail-img
-                /= image_tag("http://placehold.it/200x160", class: 'border-radius-top')
-              /h5 some other wine
-            /.box.border-radius-bottom
-              /p
-                /span.title_torrent.pull-left Wine
-          /li.span3
-            /.thumbnail.border-radius-top
-              /.bg-thumbnail-img
-                /= image_tag("http://placehold.it/200x160", class: 'border-radius-top')
-              /h5 some other wine
-            /.box.border-radius-bottom
-              /p
-                /span.title_torrent.pull-left Wine
+        .row
+          .title.bg-title.span3
+            h3 其他筆記
+        ul.thumbnails.thumbnails-horizontal
+          - @wine.other_wines(4).each do |wine|
+            li.span3
+              .thumbnail.border-radius-top
+                .bg-thumbnail-img
+                  = link_to image_tag(wine.photos.feature_photo(:normal), class: 'border-rd4', alt: wine.name), wine_path(wine)
+                h5= link_to wine.name, wine_path(wine)
+              .box.border-radius-bottom
+                p
+                  span.title_torrent.pull-left= t wine.wine_type, scope: 'activerecord.options.wine_types'
