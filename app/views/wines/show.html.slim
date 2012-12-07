@@ -74,13 +74,13 @@
           .widget-content
             .tabbable
               ul.nav.nav-tabs
-                - if @wine.appearance
+                - if @wine.appearance.present?
                   li= link_to "外觀", "#appearance", data: { toggle: 'tab' }
-                - if @wine.nose
+                - if @wine.nose.present?
                   li= link_to "香氣", "#nose", data: { toggle: 'tab' }
-                - if @wine.taste
+                - if @wine.taste.present?
                   li= link_to "口感", "#taste", data: { toggle: 'tab' }
-                - if @wine.opinion
+                - if @wine.opinion.present?
                   li= link_to "我的筆記", "#opinion", data: { toggle: 'tab' }
               .tab-content
                 - if @wine.appearance
