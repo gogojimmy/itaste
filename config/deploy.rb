@@ -79,6 +79,13 @@ namespace :deploy do
       end
     end
   end
+  task :refresh_sitemap, :roles => :app do
+    if stage.to_s == "production"
+      run "cd #{current_path} && RAILS_ENV=#{rails_env} bundle exec rake sitemap:refresh"
+    else
+      logger.info "Skipping refresh sitemap because it's only for production"
+    end
+  end
 end
 
 task :tail_log, :roles => :app do
@@ -125,3 +132,4 @@ after "mysql:sync", "mysql:backup", "mysql:import"
 after "deploy:stop",    "delayed_job:stop"
 after "deploy:start",   "delayed_job:start"
 after "deploy:restart", "delayed_job:restart"
+after 'deploy', "deploy:refresh_sitemap"
