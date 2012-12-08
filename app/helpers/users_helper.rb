@@ -4,6 +4,8 @@ module UsersHelper
       case version
       when :thumb
         image_tag("https://graph.facebook.com/#{user.uid}/picture", size: '30x30', class: class_name)
+      when :small
+        image_tag("https://graph.facebook.com/#{user.uid}/picture", size: '47x47', class: class_name)
       else
         image_tag("https://graph.facebook.com/#{user.uid}/picture", size: '110x110', class: class_name)
       end

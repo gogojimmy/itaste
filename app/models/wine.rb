@@ -4,6 +4,8 @@ class Wine < ActiveRecord::Base
   attr_reader :food_tokens, :grape_tokens
   include ActiveModel::Dirty
 
+  is_impressionable counter_cache: true
+
   belongs_to :user
   belongs_to :producer
   belongs_to :region

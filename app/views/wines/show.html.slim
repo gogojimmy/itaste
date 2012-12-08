@@ -51,7 +51,7 @@
                     li
                       .overflow-hidden
                         span.wine-producer-label 價格
-                        span.wine-property= @wine.price
+                        span.wine-property= number_to_currency @wine.price, precision: 0
                   - if @wine.foods.count != 0
                     li
                       .overflow-hiddem
