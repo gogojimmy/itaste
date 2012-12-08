@@ -27,6 +27,7 @@ class Wine < ActiveRecord::Base
 
   scope :uncomplete, where(complete: false)
   scope :completed, where(complete: true)
+  scope :sitemap, :select => 'id, name, created_at, updated_at', :limit => 4999
 
   before_update :find_or_create_place
 

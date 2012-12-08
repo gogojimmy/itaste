@@ -1,0 +1,8 @@
+doctype XML
+urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  - @wines.each do |wine|
+    url
+      loc #{wine_url(wine)}
+      lastmod= l wine.updated_at, :format => "%Y-%m-%d %H:%M:%S"
+      changefreq monthly
+      priority 1.0

@@ -11,7 +11,7 @@ class WinesController < ApplicationController
     if params[:format] == 'json'
       @wines = @wines.completed.order(:name).where("name like ?", "%#{params[:term]}%")
     else
-      @wines = @wines.completed.paginate(page: params[:page])
+      @wines = @wines.completed.order('created_at desc').paginate(page: params[:page])
     end
     respond_to do |format|
       format.html

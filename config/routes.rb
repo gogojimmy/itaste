@@ -8,6 +8,7 @@ Itaste::Application.routes.draw do
     delete 'signout' => 'devise/sessions#destroy', :as => :destroy_user_session
   end
   match 'signout', to: 'sessions#destroy', as: 'signout'
+  get '/sitemap', to: 'sitemap#index'
 
   resources :users do
     get '/notes', to: "wines#notes"

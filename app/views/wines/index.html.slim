@@ -5,6 +5,9 @@
     .row
       .title.span12
         h1.pull-left 大家都在喝
+        = link_to create_wine_wines_path, class: 'btn btn-primary pull-right' do
+          i.icon-glass
+          | 寫筆記
     ul.thumbnails.thumbnails-vertical
       - @wines.each do |wine|
         li.wine.span6
