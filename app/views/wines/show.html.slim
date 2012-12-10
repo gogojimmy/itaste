@@ -70,6 +70,10 @@
                 .wine-photos
                   - @wine.photos.each do |photo|
                     = image_tag(photo.image_url(:thumb), class: 'border-rd4 wine-photo', id: "wine-photo-#{photo.id}", data: { src: photo.image_url(:large) })
+            .row-fluid
+              .span12.pull-right
+                = render partial: 'shared/facebook_like', locals: { url: url_for(@wine) }
+              .clearfix
         .widget
           .widget-content
             .tabbable
