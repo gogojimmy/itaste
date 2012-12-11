@@ -1,5 +1,4 @@
 Itaste::Application.routes.draw do
-  default_url_options host: '3s69.localtunnel.com'
   root :to => "wines#index"
   devise_for :users, path_names: {sign_in: "login", sign_out: "logout"}, :skip => [:sessions], controllers: {omniauth_callbacks: "omniauth_callbacks"}
   devise_scope :user do
@@ -31,6 +30,9 @@ Itaste::Application.routes.draw do
   end
 
   resources :lists
+
+  get '/terms', to: 'welcome#terms'
+  get '/privacy', to: 'welcome#privacy'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
