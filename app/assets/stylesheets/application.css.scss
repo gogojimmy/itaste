@@ -13,12 +13,14 @@
  *= require jquery.ui.all
  *= require token-input-facebook
  *= require jquery.fileupload-ui
+ *= require redactor-rails
  *= require_tree .
  */
 
 $baseFontSize: 14px;
 $baseLineHeight: 23.8px;
 $bodyBackground: #33363B;
+
 @import "bootstrap";
 @import "compass";
 @import "theme/global";

@@ -2,7 +2,8 @@
 
 #serving-temperature-range-ui {
   margin-left: 0;
-  margin-top: 7px;
+  margin-top: 10px;
+  min-height: 5px;
 }
 
 span#serving_temperature_range {
@@ -39,6 +40,9 @@ ul.wine-info-list {
 h1.show-title { padding-left: 10px; }
 
 #upload-photo-link { width: 170px; }
+#upload-photo-ul {
+  margin-left: 0px;
+}
 
 .modal {
   background-color: black;

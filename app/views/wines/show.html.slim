@@ -71,35 +71,13 @@
                 .wine-photos
                   - @wine.photos.each do |photo|
                     = image_tag(photo.image_url(:thumb), class: 'border-rd4 wine-photo', id: "wine-photo-#{photo.id}", data: { src: photo.image_url(:large) })
+            hr
+            - if @wine.opinion.present?
+              = raw @wine.opinion
             .row-fluid
               .pull-right
                 = render partial: 'shared/share_tools', locals: { url: url_for(@wine) }
               .clearfix
-        .widget
-          .widget-content
-            .tabbable
-              ul.nav.nav-tabs
-                - if @wine.appearance.present?
-                  li= link_to "外觀", "#appearance", data: { toggle: 'tab' }
-                - if @wine.nose.present?
-                  li= link_to "香氣", "#nose", data: { toggle: 'tab' }
-                - if @wine.taste.present?
-                  li= link_to "口感", "#taste", data: { toggle: 'tab' }
-                - if @wine.opinion.present?
-                  li= link_to "我的筆記", "#opinion", data: { toggle: 'tab' }
-              .tab-content
-                - if @wine.appearance
-                  .tab-pane#appearance
-                    = simple_format @wine.appearance
-                - if @wine.nose
-                  .tab-pane#nose
-                    = simple_format @wine.nose
-                - if @wine.taste
-                  .tab-pane#taste
-                    = simple_format @wine.taste
-                - if @wine.opinion
-                  .tab-pane#opinion
-                    = simple_format @wine.opinion
         .widget
           .widget-content
             = render 'shared/facebook_comments'
