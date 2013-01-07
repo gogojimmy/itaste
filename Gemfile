@@ -25,6 +25,9 @@ gem 'koala'
 gem 'meta-tags', :require => 'meta_tags'
 gem 'cancan'
 gem 'impressionist'
+gem 'mini_magick'
+gem 'better_errors'
+gem 'binding_of_caller'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -34,11 +37,12 @@ group :assets do
   gem 'bootstrap-sass', '~> 2.0.4.0'
   gem 'uglifier', '>= 1.0.3'
   gem 'compass-rails'
-  gem 'font-awesome-rails'
+  gem 'font-awesome-rails', git: 'https://github.com/bokmann/font-awesome-rails.git'
   gem 'jquery-ui-rails'
   gem 'jquery-tokeninput-rails'
   gem 'jquery-fileupload-rails'
   gem 'underscore-rails'
+  gem 'redactor-rails'
 end
 
 gem 'jquery-rails'

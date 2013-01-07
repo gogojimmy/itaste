@@ -1,37 +1,45 @@
 .box-form.widget
   .widget-content
-    .title
-      h3 有關酒
+    .row-fluid
+      = render 'photos_form'
     = simple_form_for @wine, html: { class: 'form-horizontal' } do |f|
-      = f.input :name, label: "酒名", placeholder: "例如：Romanee-Conti", input_html: { class: 'wine-name-picker', data: { autocomplete_source: wines_path(format: :json) } }
-      = f.input :wine_type, label: "種類", collection: collection_for_wine_type, :as => :radio_buttons, :item_wrapper_class => 'inline'
-      = f.input :grape_tokens, label: "葡萄品種", as: :string, input_html: { class: 'span8', id: 'grape-token-input', data: { load: @wine.grapes } }
-      = f.input :vintage, label: "年份", as: :select, collection: 1950..Time.now.year
-      = f.input :alcohol, label: "酒精濃度"
-      = f.input :producer_name, label: "酒莊", input_html: { class: 'producer-picker', data: { autocomplete_source: producers_path(format: :json) } }
-      = f.input :region_name, label: "產區", input_html: { class: 'region-picker', data: { autocomplete_source: regions_path(format: :json) } }
-      = f.input :suggested_glass, label: "適用酒杯", collection: collection_for_suggested_glass, :as => :radio_buttons, :item_wrapper_class => 'inline'
-      = f.input :food_tokens, label: "搭配餐點", as: :string, input_html: { class: 'span6', id: "food-token-input", data: { load: @wine.foods } }
-      .control-group
-        label.control-label 適飲溫度
-        .controls
-          #serving-temperature-range-ui.span5
-          span#serving_temperature_range.help-inline
-      = f.input :price, label: "價格"
-      = f.input :when, label: "品酒日期", as: :string, input_html: { class: 'date-picker' }
-      = f.simple_fields_for :place do |p|
-        = p.input :name, label: '品酒地點', input_html: { class: 'place-picker', data: { autocomplete_source: "https://graph.facebook.com/search?access_token=#{current_user.facebook_token}&type=place&q=" } }
-        = p.input :lat, as: :hidden
-        = p.input :lon, as: :hidden
-        = p.input :facebook_id, as: :hidden
-      = f.input :appearance, label: "外觀", input_html: { class: 'span6', rows: 5 }
-      = f.input :nose, label: "香氣", input_html: { class: 'span6', rows: 5 }
-      = f.input :taste, label: "口感", input_html: { class: 'span6', rows: 5 }
-      = f.input :opinion, label: "想法", input_html: { class: 'span6', rows: 5 }
-      = f.input :rating, label: '我的評分', :item_wrapper_class => 'inline', hint: '上限為100分', input_html: { id: 'rating-value'}
-      = f.input :serving_temperature_from, as: :hidden, input_html: { id: 'serving_temperature_from' }
-      = f.input :serving_temperature_to, as: :hidden, input_html: { id: 'serving_temperature_to' }
-      = f.input :complete, as: :hidden, input_html: { value: 'true' }
+      .row-fluid
+        .span6
+          .title
+            h3 酒的基本資料
+          = f.input :name, label: "酒名", placeholder: "例如：Romanee-Conti", input_html: { class: 'wine-name-picker span12', data: { autocomplete_source: wines_path(format: :json) } }
+          = f.input :wine_type, label: "種類", collection: collection_for_wine_type, :as => :radio_buttons, :item_wrapper_class => 'inline'
+          = f.input :grape_tokens, label: "葡萄品種", as: :string, input_html: { id: 'grape-token-input', data: { load: @wine.grapes } }, placeholder: '例如：Cabernet Sauvignon'
+          = f.input :vintage, label: "年份", as: :select, collection: 1950..Time.now.year, include_blank: false
+          = f.input :alcohol, label: "酒精濃度", input_html: { class: 'span12' }
+          = f.input :producer_name, label: "酒莊", input_html: { class: 'producer-picker span12', data: { autocomplete_source: producers_path(format: :json) } }
+          = f.input :region_name, label: "產區", input_html: { class: 'region-picker span12', data: { autocomplete_source: regions_path(format: :json) } }
+        .span6
+          .title
+            h3 個人體驗
+          = f.input :suggested_glass, label: "適用酒杯", collection: collection_for_suggested_glass, :as => :select, :item_wrapper_class => 'inline', include_blank: false
+          = f.input :food_tokens, label: "搭配餐點", as: :string, input_html: { class: 'span6', id: "food-token-input", data: { load: @wine.foods } }
+          .control-group
+            label.control-label 適飲溫度
+            .controls
+              #serving-temperature-range-ui.span12.ui-slider.ui-slider-horizontal.ui-widget.ui-widget-content.ui-corner-all
+              span#serving_temperature_range.help-inline
+          = f.input :price, label: "價格"
+          = f.input :when, label: "品酒日期", as: :string, input_html: { class: 'date-picker' }
+          = f.simple_fields_for :place do |p|
+            = p.input :name, label: '品酒地點', input_html: { class: 'place-picker', data: { autocomplete_source: "https://graph.facebook.com/search?access_token=#{current_user.facebook_token}&type=place&q=" } }
+            = p.input :lat, as: :hidden
+            = p.input :lon, as: :hidden
+            = p.input :facebook_id, as: :hidden
+          = f.input :serving_temperature_from, as: :hidden, input_html: { id: 'serving_temperature_from' }
+          = f.input :serving_temperature_to, as: :hidden, input_html: { id: 'serving_temperature_to' }
+          = f.input :complete, as: :hidden, input_html: { value: 'true' }
+      hr
+      .row-fluid
+        .span12
+          = redactor_lang('zh_tw')
+          = f.input :opinion, label: "想法", input_html: { class: 'span12 redactor', rows: 20 }, hint: "你對這隻酒的感想、記錄會是你對這支酒的最佳筆記"
+          = f.input :rating, label: '我的評分', :item_wrapper_class => 'inline', hint: '上限為100分', input_html: { id: 'rating-value'}
       .form-actions
         = f.submit "送出", class: 'btn btn-primary'
         = submit_tag '取消', :type => :reset, :class => 'btn btn-danger'
