@@ -28,6 +28,7 @@ gem 'impressionist'
 gem 'mini_magick'
 gem 'better_errors'
 gem 'binding_of_caller'
+gem 'redactor-rails'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -42,7 +43,6 @@ group :assets do
   gem 'jquery-tokeninput-rails'
   gem 'jquery-fileupload-rails'
   gem 'underscore-rails'
-  gem 'redactor-rails'
 end
 
 gem 'jquery-rails'
