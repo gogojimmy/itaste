@@ -6,7 +6,7 @@ require "delayed/recipes"
 require "rvm/capistrano"
 load 'deploy/assets'
 
-set :rvm_ruby_string, '1.9.3-p194'
+set :rvm_ruby_string, ENV['GEM_HOME'].gsub(/.*\//,"")
 
 set :application, "itaste"
 set :repository,  "git@github.com:gogojimmy/itaste.git"
