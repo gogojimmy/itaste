@@ -67,6 +67,8 @@ module Itaste
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
+    config.assets.precompile += %w( redactor-rails/langs/zh_tw.js )
+
     # Slim
     Slim::Engine.set_default_options :pretty => true
 
