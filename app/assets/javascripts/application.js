@@ -7,7 +7,5 @@
 //= require jquery-fileupload/basic
 //= require jquery-fileupload/vendor/tmpl
 //= require underscore
-//= require image_fuctions
-//= require wine
 //= require redactor-rails
-//= require redactor-rails/config
+//= require_tree .
