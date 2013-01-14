@@ -10,3 +10,4 @@
 //= require image_fuctions
 //= require wine
 //= require redactor-rails
+//= require redactor-rails/config
