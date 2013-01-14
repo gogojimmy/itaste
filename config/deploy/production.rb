@@ -1,5 +1,5 @@
 set :rails_env, "production"
-set :user, "itaste"
+set :user, "jaja"
 set :domain, "itaste.tw"
 set :branch, "master"
 
