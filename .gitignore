@@ -6,6 +6,7 @@
 
 # Ignore bundler config
 /.bundle
+vendor/bundler_gems
 
 # Ignore the default SQLite database.
 /db/*.sqlite3
@@ -16,3 +17,4 @@
 
 /public/uploads
 /config/*.yml
+/public/system/redactor_assets/
