@@ -76,7 +76,7 @@
               = raw @wine.opinion
             .row-fluid
               .pull-right
-                = render partial: 'shared/share_tools', locals: { url: url_for(@wine) }
+                = render partial: 'shared/share_tools', locals: { url: wine_url(@wine) }
               .clearfix
         .widget
           .widget-content
