@@ -1,5 +1,4 @@
 Itaste::Application.routes.draw do
-  mount RedactorRails::Engine => '/redactor_rails'
 
   root :to => "wines#index"
   devise_for :users, path_names: {sign_in: "login", sign_out: "logout"}, :skip => [:sessions], controllers: {omniauth_callbacks: "omniauth_callbacks"}

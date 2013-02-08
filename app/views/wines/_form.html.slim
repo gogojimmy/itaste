@@ -37,7 +37,7 @@
       hr
       .row-fluid
         .span12
-          = f.input :opinion, label: "想法", input_html: { class: 'span12 redactor', rows: 20 }, hint: "你對這隻酒的感想、記錄會是你對這支酒的最佳筆記"
+          = f.input :opinion, label: "想法", input_html: { class: 'span12', rows: 20 }, hint: "你對這隻酒的感想、記錄會是你對這支酒的最佳筆記"
           = f.input :rating, label: '我的評分', :item_wrapper_class => 'inline', hint: '上限為100分', input_html: { id: 'rating-value'}
       .form-actions
         = f.submit "送出", class: 'btn btn-primary'

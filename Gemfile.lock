@@ -205,10 +205,6 @@ GEM
     rake (10.0.3)
     rdoc (3.12.1)
       json (~> 1.4)
-    redactor-rails (0.3.3)
-      devise
-      mime-types
-      orm_adapter
     rmagick (2.13.2)
     ruby-hmac (0.4.0)
     rvm-capistrano (1.2.7)
@@ -280,7 +276,6 @@ DEPENDENCIES
   mysql2
   omniauth-facebook!
   rails (= 3.2.11)
-  redactor-rails
   rmagick
   rvm-capistrano
   sass-rails (~> 3.2.3)
