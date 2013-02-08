@@ -73,7 +73,7 @@
                     = image_tag(photo.image_url(:thumb), class: 'border-rd4 wine-photo', id: "wine-photo-#{photo.id}", data: { src: photo.image_url(:large) })
             hr
             - if @wine.opinion.present?
-              = raw @wine.opinion
+              = simple_format @wine.opinion
             .row-fluid
               .pull-right
                 = render partial: 'shared/share_tools', locals: { url: wine_url(@wine) }
