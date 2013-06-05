@@ -1,7 +1,5 @@
 jQuery ->
 
-  FixImages(false)
-
   $(".date-picker").datepicker
     dateFormat: 'yy-mm-dd'
     monthNames: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"]
@@ -58,17 +56,6 @@ jQuery ->
       $("#serving_temperature_from").val ui.values[0]
       $("#serving_temperature_to").val ui.values[1]
 
-  $("#food-token-input").tokenInput '/foods.json'
-    theme: 'facebook'
-    hintText: "輸入您搭配的食物種類，以半型逗號 ',' 隔開可輸入更多搭配的食物"
-    searchingText: "搜尋中..."
-    prePopulate: $('#food-token-input').data('load')
-
-  $("#grape-token-input").tokenInput '/grapes.json'
-    theme: 'facebook'
-    hintText: "輸入這支酒的葡萄種類，以半型逗號 ',' 隔開可輸入更多葡萄品種"
-    searchingText: "搜尋中..."
-    prePopulate: $('#grape-token-input').data('load')
 
   $(".nav-tabs li:first").addClass 'active'
   $(".tab-content .tab-pane:first").addClass 'active'
@@ -76,10 +63,10 @@ jQuery ->
   $("#new_photo").fileupload
     dataType: "script"
     add: (e, data) ->
-      types = /(\.|\/)(gif|jpe?g|png)$/i
+      types = /(\.|\/)(gif|jpe?g|png|JPG|JPE?G)$/i
       file = data.files[0]
       if types.test(file.type) || types.test(file.name)
-        data.context = $(tmpl("template-upload", file))
+        data.context = $($.parseHTML(tmpl("template-upload", file)))
         $('#new_photo').append(data.context)
         data.submit()
       else
@@ -120,3 +107,17 @@ jQuery ->
   $("#list-area, #choosable-wines").sortable(
     connectWith: ".sortable"
   ).disableSelection()
+
+  $("#food-token-input").tokenInput('/foods.json',
+    theme: 'facebook'
+    hintText: "輸入您搭配的食物種類，以半型逗號 ',' 隔開可輸入更多搭配的食物"
+    searchingText: "搜尋中..."
+    prePopulate: $('#food-token-input').data('load')
+  )
+
+  $("#grape-token-input").tokenInput('/grapes.json',
+    theme: 'facebook'
+    hintText: "輸入這支酒的葡萄種類，以半型逗號 ',' 隔開可輸入更多葡萄品種"
+    searchingText: "搜尋中..."
+    prePopulate: $('#grape-token-input').data('load')
+  )

@@ -41,5 +41,5 @@ end
 
 CarrierWave::Backgrounder.configure do |c|
   # :delayed_job, :girl_friday, :sidekiq, :qu, :resque, or :qc
-  c.backend = :delayed_job
+  c.backend :delayed_job
 end

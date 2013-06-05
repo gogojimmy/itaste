@@ -20,11 +20,13 @@
           = f.hidden_field :wine_id, valud: @wine.id
       .clearfix
       .upload-progress
+
         script#template-upload type="text/x-tmpl"
           .upload
             | {%=o.name%}
             .progress.progress-success.progress-striped.active
               .bar style="width: 0%;"
+
       .clearfix
       hr
       span 上傳檔案限制為 5MB 以下之 jpg, jpeg, png 格式圖片。

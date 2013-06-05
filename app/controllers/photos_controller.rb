@@ -1,4 +1,5 @@
 class PhotosController < ApplicationController
+  config.relative_url_root = ""
   def create
     @photo = Photo.create(params[:photo])
   end

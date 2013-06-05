@@ -15,10 +15,6 @@ class ImageUploader < CarrierWave::Uploader::Base
     "/assets/fallback/" + [version_name, "default.png"].compact.join('_')
   end
 
-  def extension_white_list
-    %w(jpg jpeg gif png)
-  end
-
   version :thumb do
     process :fix_exif_rotation
     process :strip
